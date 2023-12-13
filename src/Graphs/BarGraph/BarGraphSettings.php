@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Visualisations\BarGraph;
+namespace Medas\Charts\Graphs\BarGraph;
 
 class BarGraphSettings
 {

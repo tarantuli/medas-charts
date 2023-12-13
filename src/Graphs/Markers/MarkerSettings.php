@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Visualisations\Markers;
+namespace Medas\Charts\Graphs\Markers;
 
 class MarkerSettings
 {

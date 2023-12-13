@@ -10,18 +10,18 @@ use Medas\Core\Attributes\Service;
 readonly class ChartFactory
 {
     public function __construct(
-        private Axes\AxisFactory                                  $axisFactory,
-        private Data\DataSettingsFactory                          $dataSettingsFactory,
-        private Image\ImageSettingsFactory                        $imageSettingsFactory,
-        private Legend\LegendSettingsFactory                      $legendSettingsFactory,
-        private Settings\ChartSettingsFactory                     $chartSettingsFactory,
-        private Settings\ColorSettingsFactory                     $colorSettingsFactory,
-        private Settings\FontSettingsFactory                      $fontSettingsFactory,
-        private Visualisations\BarGraph\BarGraphSettingsFactory   $barGraphSettingsFactory,
-        private Visualisations\Histogram\HistogramSettingsFactory $histogramSettingsFactory,
-        private Visualisations\Lines\LineSettingsFactory          $lineSettingsFactory,
-        private Visualisations\Markers\MarkerSettingsFactory      $markerSettingsFactory,
-        private Visualisations\VisualisationSettingsFactory       $visualisationSettingsFactory,
+        private Axes\AxisFactory                          $axisFactory,
+        private Data\DataSettingsFactory                  $dataSettingsFactory,
+        private Image\ImageSettingsFactory                $imageSettingsFactory,
+        private Legend\LegendSettingsFactory              $legendSettingsFactory,
+        private Settings\ChartSettingsFactory             $chartSettingsFactory,
+        private Settings\ColorSettingsFactory             $colorSettingsFactory,
+        private Settings\FontSettingsFactory              $fontSettingsFactory,
+        private Graphs\BarGraph\BarGraphSettingsFactory   $barGraphSettingsFactory,
+        private Graphs\Histogram\HistogramSettingsFactory $histogramSettingsFactory,
+        private Graphs\Lines\LineSettingsFactory          $lineSettingsFactory,
+        private Graphs\Markers\MarkerSettingsFactory      $markerSettingsFactory,
+        private Graphs\GraphSettingsFactory               $graphSettingsFactory,
     )
     {
     }
@@ -46,8 +46,8 @@ readonly class ChartFactory
         // Data settings
         $chart->dataSettings = $this->dataSettingsFactory->create();
 
-        // Visualisation settings
-        $chart->visualisationSettings = $this->visualisationSettingsFactory->create();
+        // Graph settings
+        $chart->graphSettings = $this->graphSettingsFactory->create();
         $chart->barGraphSettings = $this->barGraphSettingsFactory->create();
         $chart->histogramSettings = $this->histogramSettingsFactory->create();
         $chart->lineSettings = $this->lineSettingsFactory->create();

@@ -22,10 +22,14 @@ class Chart
     // Data settings
     public Data\DataSettings $dataSettings;
 
-    // Visualisation settings
-    public Visualisations\VisualisationSettings $visualisationSettings;
-    public Visualisations\BarGraph\BarGraphSettings $barGraphSettings;
-    public Visualisations\Histogram\HistogramSettings $histogramSettings;
-    public Visualisations\Lines\LineSettings $lineSettings;
-    public Visualisations\Markers\MarkerSettings $markerSettings;
+    // Graph settings
+    public Graphs\GraphSettings $graphSettings;
+    public Graphs\BarGraph\BarGraphSettings $barGraphSettings;
+    public Graphs\Histogram\HistogramSettings $histogramSettings;
+    public Graphs\Lines\LineSettings $lineSettings;
+    public Graphs\Markers\MarkerSettings $markerSettings;
+
+    // Data
+    /** @var Data\Data[] */
+    public array $data = [];
 }

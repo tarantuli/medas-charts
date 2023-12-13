@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Visualisations\Markers\Types;
+namespace Medas\Charts\Graphs\Markers\Types;
 
 interface MarkerType
 {

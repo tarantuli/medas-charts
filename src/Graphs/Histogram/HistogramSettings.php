@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Visualisations\Histogram;
+namespace Medas\Charts\Graphs\Histogram;
 
 class HistogramSettings
 {

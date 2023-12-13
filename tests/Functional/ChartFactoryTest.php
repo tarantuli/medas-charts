@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\ChartsTest\Functional;
 
-use Medas\Charts\Chart;
-use Medas\Charts\ChartFactory;
+use Medas\Charts\{Chart, ChartFactory};
 use PHPUnit\Framework\TestCase;
 
 class ChartFactoryTest extends TestCase

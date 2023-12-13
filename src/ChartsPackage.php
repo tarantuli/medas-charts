@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Medas\Charts;
 
 use Medas\Core\AsSingleton;
+use Medas\ImageManager\ImageManagerPackage;
 use Medas\ServiceManager\BasePackage;
 
 class ChartsPackage extends BasePackage
@@ -13,7 +14,9 @@ class ChartsPackage extends BasePackage
 
     public function dependencies(): array
     {
-        return [];
+        return [
+            ImageManagerPackage::instance(),
+        ];
     }
 
     public function sourceDirectory(): string

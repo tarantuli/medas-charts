@@ -21,7 +21,7 @@ readonly class LegendSettingsFactory
     {
         $settings = new LegendSettings();
 
-        $settings->backgroundColor = $this->colorManager->fromHtmlString('#d0fff');
+        $settings->backgroundColor = $this->colorManager->fromHtmlString('#dfff');
         $settings->margin = new FourSides(5);
         $settings->padding = new FourSides(3);
         $settings->lineSpacing = 5;

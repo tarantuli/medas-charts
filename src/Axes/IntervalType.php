@@ -8,5 +8,5 @@ enum IntervalType
 {
     case Numeric;
     case DateTime;
-    case Categories;
+    case Categorized;
 }

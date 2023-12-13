@@ -11,22 +11,28 @@ readonly class ChartFactory
 {
     public function __construct(
         private Axes\AxisFactory                          $axisFactory,
+        private Data\DataController                       $dataController,
         private Data\DataSettingsFactory                  $dataSettingsFactory,
+        private Graphs\BarGraph\BarGraphSettingsFactory   $barGraphSettingsFactory,
+        private Graphs\GraphController                    $graphController,
+        private Graphs\GraphSettingsFactory               $graphSettingsFactory,
+        private Graphs\Histogram\HistogramSettingsFactory $histogramSettingsFactory,
+        private Graphs\Lines\LineSettingsFactory          $lineSettingsFactory,
+        private Graphs\Markers\MarkerSettingsFactory      $markerSettingsFactory,
         private Image\ImageSettingsFactory                $imageSettingsFactory,
         private Legend\LegendSettingsFactory              $legendSettingsFactory,
         private Settings\ChartSettingsFactory             $chartSettingsFactory,
         private Settings\ColorSettingsFactory             $colorSettingsFactory,
         private Settings\FontSettingsFactory              $fontSettingsFactory,
-        private Graphs\BarGraph\BarGraphSettingsFactory   $barGraphSettingsFactory,
-        private Graphs\Histogram\HistogramSettingsFactory $histogramSettingsFactory,
-        private Graphs\Lines\LineSettingsFactory          $lineSettingsFactory,
-        private Graphs\Markers\MarkerSettingsFactory      $markerSettingsFactory,
-        private Graphs\GraphSettingsFactory               $graphSettingsFactory,
     )
     {
     }
 
-    public function create(): Chart
+    public function create(
+        Data\Data $data = null,
+        string    $graphType = null,
+        array     $graphArguments = [],
+    ): Chart
     {
         $chart = new Chart();
 
@@ -52,6 +58,15 @@ readonly class ChartFactory
         $chart->histogramSettings = $this->histogramSettingsFactory->create();
         $chart->lineSettings = $this->lineSettingsFactory->create();
         $chart->markerSettings = $this->markerSettingsFactory->create();
+
+        // Optional data and graph arguments
+        if ($data) {
+            $dataName = $this->dataController->add($chart, $data);
+
+            if ($graphType) {
+                $this->graphController->add($chart, $dataName, $graphType, $graphArguments);
+            }
+        }
 
         return $chart;
     }

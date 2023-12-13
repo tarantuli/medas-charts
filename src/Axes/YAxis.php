@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes;
 
-class YAxis extends BaseAxis
+class YAxis extends Axis
 {
 }

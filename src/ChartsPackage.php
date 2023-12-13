@@ -6,7 +6,7 @@ namespace Medas\Charts;
 
 use Medas\Core\AsSingleton;
 use Medas\ImageManager\ImageManagerPackage;
-use Medas\ServiceManager\BasePackage;
+use Medas\ServiceManager\{BasePackage, ServiceConfig};
 
 class ChartsPackage extends BasePackage
 {
@@ -22,5 +22,12 @@ class ChartsPackage extends BasePackage
     public function sourceDirectory(): string
     {
         return __DIR__;
+    }
+
+    public function initialize(ServiceConfig $config): void
+    {
+        parent::initialize($config);
+
+        require_once __DIR__ . '/GlobalFunctions.php';
     }
 }

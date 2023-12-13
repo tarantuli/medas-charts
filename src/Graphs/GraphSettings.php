@@ -8,5 +8,4 @@ class GraphSettings
 {
     public bool $drawSmoothLines;
     public bool $drawSquaredLines;
-    public Graph $defaultGraph;
 }

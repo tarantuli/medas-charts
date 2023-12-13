@@ -32,4 +32,9 @@ class Chart
     // Data
     /** @var Data\Data[] */
     public array $data = [];
+    public Data\Range2D $range2D;
+
+    // Graphs
+    /** @var Graphs\Graph[] */
+    public array $graphs = [];
 }

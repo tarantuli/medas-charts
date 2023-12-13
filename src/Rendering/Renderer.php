@@ -11,8 +11,20 @@ use Medas\ImageManager\Image;
 #[Service]
 readonly class Renderer
 {
+    public function __construct(
+        private DimensionsCalculator $dimensionsCalculator,
+    )
+    {
+    }
+
     public function render(Chart $chart): Image
     {
-        diedump($chart);
+        $job = new Job($chart);
+
+        $this->dimensionsCalculator->calculate($chart);
+
+        funcdump($job);
+
+        return $job->image;
     }
 }

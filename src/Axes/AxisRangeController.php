@@ -87,6 +87,12 @@ readonly class AxisRangeController
         }
     }
 
+    private function checkForBlockGraphs(Axis $axis): void
+    {
+        // If the X axis contains block graphs, barOffset should be 1 (to add additional space for bar rectangles)
+        $axis->barOffset = 0;
+    }
+
     private function applyIntervalType(Chart $chart, Axis $axis): void
     {
         match ($axis->intervalType) {
@@ -97,11 +103,5 @@ readonly class AxisRangeController
                 $axis
             ),
         };
-    }
-
-    private function checkForBlockGraphs(Axis $axis): void
-    {
-        // If the X axis contains block graphs, barOffset should be 1 (to add additional space for bar rectangles)
-        $axis->barOffset = 0;
     }
 }

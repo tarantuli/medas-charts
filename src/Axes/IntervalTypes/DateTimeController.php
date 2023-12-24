@@ -246,17 +246,6 @@ readonly class DateTimeController
         );
     }
 
-    private function determineForAYearOrMore(Axis $axis): void
-    {
-        $axis->dateLabelFormat = '%Y';
-        $axis->roughInterval /= Number::ONE_YEAR;
-        $axis->interval = $this->normalizeInterval($axis, $axis->roughInterval);
-        $axis->subgridInterval = $axis->interval / $axis->subgridCount;
-        $axis->iterationType = IterationType::Yearly;
-        $axis->min = mktime(0, 0, 0, 1, 1, date('Y', $axis->min) - $axis->barOffset);
-        $axis->max = mktime(0, 0, 0, 1, 0, (int) date('Y', $axis->max) + $axis->barOffset + 1);
-    }
-
     private function getBestInterval(float $interval, array $options): int
     {
         foreach ($options as $option => $dump) {
@@ -266,6 +255,17 @@ readonly class DateTimeController
         }
 
         return 1;
+    }
+
+    private function determineForAYearOrMore(Axis $axis): void
+    {
+        $axis->dateLabelFormat = '%Y';
+        $axis->roughInterval /= Number::ONE_YEAR;
+        $axis->interval = $this->normalizeInterval($axis, $axis->roughInterval);
+        $axis->subgridInterval = $axis->interval / $axis->subgridCount;
+        $axis->iterationType = IterationType::Yearly;
+        $axis->min = mktime(0, 0, 0, 1, 1, date('Y', $axis->min) - $axis->barOffset);
+        $axis->max = mktime(0, 0, 0, 1, 0, (int) date('Y', $axis->max) + $axis->barOffset + 1);
     }
 
     private function normalizeInterval(Axis $axis, float $range): float

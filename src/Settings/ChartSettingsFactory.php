@@ -40,6 +40,7 @@ readonly class ChartSettingsFactory
         $settings->pseudoAntialiasingFactor = 4;
         $settings->showTitle = true;
         $settings->showLegend = false;
+        $settings->isOnY2NameMarker = ' &#9658;';
 
         return $settings;
     }

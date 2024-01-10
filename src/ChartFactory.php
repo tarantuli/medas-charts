@@ -19,6 +19,7 @@ readonly class ChartFactory
         private Graphs\Histogram\HistogramSettingsFactory $histogramSettingsFactory,
         private Graphs\Lines\LineSettingsFactory          $lineSettingsFactory,
         private Graphs\Markers\MarkerSettingsFactory      $markerSettingsFactory,
+        private Grid\GridFactory                          $gridFactory,
         private Image\ImageSettingsFactory                $imageSettingsFactory,
         private Legend\LegendSettingsFactory              $legendSettingsFactory,
         private Settings\ChartSettingsFactory             $chartSettingsFactory,
@@ -40,14 +41,14 @@ readonly class ChartFactory
         $chart->xAxis = $this->axisFactory->createXAxis();
         $chart->yAxis = $this->axisFactory->createYAxis();
         $chart->y2Axis = $this->axisFactory->createY2Axis();
-        $chart->legendSettings = $this->legendSettingsFactory->create();
+        $chart->grid = $this->gridFactory->create();
 
         // Settings
         $chart->imageSettings = $this->imageSettingsFactory->create();
         $chart->chartSettings = $this->chartSettingsFactory->create();
         $chart->fontSettings = $this->fontSettingsFactory->create();
         $chart->colorSettings = $this->colorSettingsFactory->create();
-        $chart->axisSettings = $this->axisFactory->createAxisSettings();
+        $chart->legendSettings = $this->legendSettingsFactory->create();
 
         // Data settings
         $chart->dataSettings = $this->dataSettingsFactory->create();

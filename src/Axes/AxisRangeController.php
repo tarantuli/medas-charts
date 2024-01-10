@@ -95,10 +95,10 @@ readonly class AxisRangeController
 
     private function applyIntervalType(Chart $chart, Axis $axis): void
     {
-        match ($axis->intervalType) {
-            IntervalType::Numeric => $this->numericController->determineMinMax($axis),
-            IntervalType::DateTime => $this->dateTimeController->determineMinMax($axis),
-            IntervalType::Categorized => $this->categorizedController->determineMinMax(
+        match ($axis->settings->intervalType) {
+            IntervalTypes\IntervalType::Numeric => $this->numericController->determineMinMax($axis),
+            IntervalTypes\IntervalType::DateTime => $this->dateTimeController->determineMinMax($axis),
+            IntervalTypes\IntervalType::Categorized => $this->categorizedController->determineMinMax(
                 $chart,
                 $axis
             ),

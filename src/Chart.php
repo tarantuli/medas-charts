@@ -10,13 +10,13 @@ class Chart
     public Axes\XAxis $xAxis;
     public Axes\YAxis $yAxis;
     public Axes\Y2Axis $y2Axis;
+    public Grid\Grid $grid;
 
     // Settings
     public Image\ImageSettings $imageSettings;
     public Settings\ChartSettings $chartSettings;
     public Settings\FontSettings $fontSettings;
     public Settings\ColorSettings $colorSettings;
-    public Axes\AxisSettings $axisSettings;
     public Legend\LegendSettings $legendSettings;
 
     // Data settings
@@ -29,12 +29,13 @@ class Chart
     public Graphs\Lines\LineSettings $lineSettings;
     public Graphs\Markers\MarkerSettings $markerSettings;
 
+    // Titles
+    public float $titleHeight;
+
     // Data
-    /** @var Data\Data[] */
-    public array $data = [];
+    public /** @var Data\Data[] */ array $data = [];
     public Data\Range2D $range2D;
 
     // Graphs
-    /** @var Graphs\Graph[] */
-    public array $graphs = [];
+    public /** @var Graphs\Graph[] */ array $graphs = [];
 }

@@ -48,18 +48,18 @@ readonly class NumericController
             return 1;
         }
 
-        $power = floor(log($range / $axis->desiredIntervalCount, 10));
+        $power = floor(log($range / $axis->settings->desiredIntervalCount, 10));
         $factor = pow(10, $power);
         $base = null;
 
-        foreach ($axis->normalizationBases as $base) {
-            if (Number::isLessThanOrEqual($range, $axis->desiredIntervalCount * $base * $factor)) {
+        foreach ($axis->settings->normalizationBases as $base) {
+            if (Number::isLessThanOrEqual($range, $axis->settings->desiredIntervalCount * $base * $factor)) {
                 break;
             }
         }
 
-        if ($range > $axis->desiredIntervalCount * $base * $factor) {
-            $base = $axis->normalizationBases[0];
+        if ($range > $axis->settings->desiredIntervalCount * $base * $factor) {
+            $base = $axis->settings->normalizationBases[0];
             $factor *= 10;
         }
 

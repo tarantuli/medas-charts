@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes\IntervalTypes;
 
-use Medas\Charts\{Axes\Axis, Axes\IterationType, Number};
+use Medas\Charts\{Axes\Axis, Number};
 use Medas\Core\Attributes\Service;
 
 #[Service]
@@ -12,7 +12,7 @@ readonly class DateTimeController
 {
     public function determineMinMax(Axis $axis): void
     {
-        $axis->roughInterval = ($axis->max - $axis->min) / $axis->desiredIntervalCount;
+        $axis->roughInterval = ($axis->max - $axis->min) / $axis->settings->desiredIntervalCount;
 
         if ($axis->roughInterval < Number::ONE_MINUTE) {
             $this->determineForLessThanAMinute($axis);
@@ -276,8 +276,8 @@ readonly class DateTimeController
             return 1;
         }
 
-        $intervalCount = $axis->desiredIntervalCount;
-        $bases = $axis->normalizationBases;
+        $intervalCount = $axis->settings->desiredIntervalCount;
+        $bases = $axis->settings->normalizationBases;
         $power = floor(log($range / $intervalCount, 10));
         $factor = pow(10, $power);
         $base = null;

@@ -48,7 +48,7 @@ readonly class YAxisRangeCalculator
                 throw new ImageNotHighEnough();
             }
 
-            $chart->chartSettings->height = $chartHeight;
+            $chart->chartSettings->height = (int) $chartHeight;
         }
         else {
             $chartHeight = $chart->chartSettings->height;
@@ -59,7 +59,7 @@ readonly class YAxisRangeCalculator
                 + $xAxisHeight
                 + $bottomPadding;
 
-            $chart->imageSettings->height = $imageHeight;
+            $chart->imageSettings->height = (int) $imageHeight;
         }
 
         $chart->grid->yo = $topPadding + $chartTitleHeight + $chartHeight;

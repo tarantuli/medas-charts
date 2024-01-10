@@ -52,7 +52,7 @@ readonly class XAxisRangeCalculator
                 throw new ImageNotWideEnough();
             }
 
-            $chart->chartSettings->width = $chartWidth;
+            $chart->chartSettings->width = (int) $chartWidth;
         }
         else {
             $chartWidth = $chart->chartSettings->width;
@@ -64,7 +64,7 @@ readonly class XAxisRangeCalculator
                 + $legendWidth
                 + $rightPadding;
 
-            $chart->imageSettings->width = $imageWidth;
+            $chart->imageSettings->width = (int) $imageWidth;
         }
 
         $chart->grid->xo = $leftPadding + $yAxisWidth;

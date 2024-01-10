@@ -12,5 +12,7 @@ readonly class DimensionsCalculator
 {
     public function getWidthInRightMargin(Chart $chart): float
     {
+        // Todo
+        return 0.0;
     }
 }

@@ -23,7 +23,7 @@ readonly class Renderer
 
         $this->dimensionsCalculator->calculate($chart);
 
-        funcdump($job);
+        diedump($job);
 
         return $job->image;
     }

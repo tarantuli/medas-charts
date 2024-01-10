@@ -22,7 +22,7 @@ readonly class CrossWidthCalculator
             return $axis->crossWidth;
         }
 
-        if ($axis->settings->showTitle && $axis->settings->title) {
+        if ($axis->settings->showTitle && strlen($axis->settings->title) >= 1) {
             $height = $this->boundingBoxFactory->create(
                 $axis->settings->title,
                 $axis->settings->titleSettings->font,
@@ -51,5 +51,7 @@ readonly class CrossWidthCalculator
 
     public function labelWidth(): float
     {
+        // Todo
+        return 0.0;
     }
 }

@@ -26,6 +26,7 @@ readonly class AxisFactory
         $settings->tickLength = 2.0;
         $settings->tickMargin = 5.0;
         $settings->showLabels = true;
+        $settings->showTitle = true;
 
         $settings->titleSettings = new TextSettings(
             font: 'trebuc',

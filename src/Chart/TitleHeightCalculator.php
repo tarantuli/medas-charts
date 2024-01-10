@@ -22,7 +22,7 @@ readonly class TitleHeightCalculator
             return $chart->titleHeight;
         }
 
-        if (!$chart->chartSettings->showTitle || !$chart->chartSettings->title) {
+        if (!$chart->chartSettings->showTitle || strlen($chart->chartSettings->title) === 0) {
             return $chart->titleHeight = 0.0;
         }
 

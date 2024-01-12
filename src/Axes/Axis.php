@@ -8,10 +8,15 @@ abstract class Axis
 {
     public AxisSettings $settings;
 
-    // Range
-    public float|null $min = null;
-    public float|null $max = null;
-    public float|null $range;
+    // Values
+    public float|null $minValue = null;
+    public float|null $maxValue = null;
+    public float|null $valueRange;
+
+    // Pixels
+    public float $pixelAtOrigin;
+    public float $pixelAtMaxValue;
+    public float $pixelWidth;
 
     // Interval
     public float $roughInterval;

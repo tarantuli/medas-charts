@@ -7,8 +7,9 @@ namespace Medas\ChartsTest\Functional;
 use Medas\Charts\ChartFactory;
 use Medas\Charts\Data\KeyToValueArray\KeyToValueArray;
 use Medas\Charts\Graphs\Lines\LineGraph;
+use Medas\Charts\Image\Image;
 use Medas\Charts\Rendering\Renderer;
-use Medas\ImageManager\Image;
+use Medas\ImageManager\ColorManager;
 use PHPUnit\Framework\TestCase;
 
 class ChartRenderTest extends TestCase
@@ -20,8 +21,13 @@ class ChartRenderTest extends TestCase
             LineGraph::class
         );
 
+        $chart->imageSettings->backgroundColor = service(ColorManager::class)->fromHtmlString('#fff');
+
         $image = service(Renderer::class)->render($chart);
 
         self::assertInstanceOf(Image::class, $image);
+        funcdump($chart);
+
+        imagepng($image->resource, 'var/test-output.png');
     }
 }

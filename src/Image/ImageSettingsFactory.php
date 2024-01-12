@@ -23,6 +23,7 @@ readonly class ImageSettingsFactory
 
         $settings->height = 400;
         $settings->width = 600;
+        $settings->scalingFactor = 4;
         $settings->backgroundColor = $this->colorManager->fromHtmlString('#0fff');
         $settings->padding = new FourSides(15);
         $settings->sizeLock = SizeLock::ImageSize;

@@ -12,7 +12,8 @@ readonly class DateTimeController
 {
     public function determineMinMax(Axis $axis): void
     {
-        $axis->roughInterval = ($axis->max - $axis->min) / $axis->settings->desiredIntervalCount;
+        $axis->roughInterval = ($axis->maxValue - $axis->minValue)
+            / $axis->settings->desiredIntervalCount;
 
         if ($axis->roughInterval < Number::ONE_MINUTE) {
             $this->determineForLessThanAMinute($axis);
@@ -36,7 +37,7 @@ readonly class DateTimeController
 
     private function determineForLessThanAMinute(Axis $axis): void
     {
-        $axis->dateLabelFormat = (date('d', $axis->min) !== date('d', $axis->max))
+        $axis->dateLabelFormat = (date('d', $axis->minValue) !== date('d', $axis->maxValue))
             ? '%d %b %H:%M'
             : '%H:%M';
 
@@ -53,28 +54,28 @@ readonly class DateTimeController
         $axis->subgridCount = $options[$axis->interval];
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
 
-        $axis->min = mktime(
-            (int) date('H', $axis->min),
-            (int) date('i', $axis->min),
-            $axis->interval * floor(date('s', $axis->min) / $axis->interval - $axis->barOffset),
-            (int) date('m', $axis->min),
-            (int) date('d', $axis->min),
-            (int) date('Y', $axis->min)
+        $axis->minValue = mktime(
+            (int) date('H', $axis->minValue),
+            (int) date('i', $axis->minValue),
+            $axis->interval * floor(date('s', $axis->minValue) / $axis->interval - $axis->barOffset),
+            (int) date('m', $axis->minValue),
+            (int) date('d', $axis->minValue),
+            (int) date('Y', $axis->minValue)
         );
 
-        $axis->max = mktime(
-            (int) date('H', $axis->max),
-            (int) date('i', $axis->max),
-            $axis->interval * floor(date('s', $axis->max) / $axis->interval + $axis->barOffset),
-            (int) date('m', $axis->max),
-            (int) date('d', $axis->max),
-            (int) date('Y', $axis->max)
+        $axis->maxValue = mktime(
+            (int) date('H', $axis->maxValue),
+            (int) date('i', $axis->maxValue),
+            $axis->interval * floor(date('s', $axis->maxValue) / $axis->interval + $axis->barOffset),
+            (int) date('m', $axis->maxValue),
+            (int) date('d', $axis->maxValue),
+            (int) date('Y', $axis->maxValue)
         );
     }
 
     private function determineForLessThanAnHour(Axis $axis): void
     {
-        $axis->dateLabelFormat = (date('d', $axis->min) !== date('d', $axis->max))
+        $axis->dateLabelFormat = (date('d', $axis->minValue) !== date('d', $axis->maxValue))
             ? '%d %b %H:%M'
             : '%H:%M';
 
@@ -92,34 +93,34 @@ readonly class DateTimeController
         $axis->subgridCount = $options[$axis->interval];
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
 
-        $axis->min = mktime(
-            (int) date('H', $axis->min),
+        $axis->minValue = mktime(
+            (int) date('H', $axis->minValue),
             ($axis->interval / Number::ONE_MINUTE) * floor(date(
                 'i',
-                $axis->min
+                $axis->minValue
             ) / ($axis->interval / Number::ONE_MINUTE) - $axis->barOffset),
             0,
-            (int) date('m', $axis->min),
-            (int) date('d', $axis->min),
-            (int) date('Y', $axis->min)
+            (int) date('m', $axis->minValue),
+            (int) date('d', $axis->minValue),
+            (int) date('Y', $axis->minValue)
         );
 
-        $axis->max = mktime(
-            (int) date('H', $axis->max),
+        $axis->maxValue = mktime(
+            (int) date('H', $axis->maxValue),
             ($axis->interval / Number::ONE_MINUTE) * ceil(date(
                 'i',
-                $axis->max
+                $axis->maxValue
             ) / ($axis->interval / Number::ONE_MINUTE) + $axis->barOffset),
             0,
-            (int) date('m', $axis->max),
-            (int) date('d', $axis->max),
-            (int) date('Y', $axis->max)
+            (int) date('m', $axis->maxValue),
+            (int) date('d', $axis->maxValue),
+            (int) date('Y', $axis->maxValue)
         );
     }
 
     private function determineForLessThanADay(Axis $axis): void
     {
-        $axis->dateLabelFormat = (date('d', $axis->min) !== date('d', $axis->max))
+        $axis->dateLabelFormat = (date('d', $axis->minValue) !== date('d', $axis->maxValue))
             ? '%d %b %H:%M'
             : '%H:%M';
 
@@ -140,34 +141,34 @@ readonly class DateTimeController
             $axis->dateLabelFormat = '%d %b';
         }
 
-        $axis->min = mktime(
+        $axis->minValue = mktime(
             ($axis->interval / Number::ONE_HOUR) * floor(date(
                 'H',
-                $axis->min
+                $axis->minValue
             ) / ($axis->interval / Number::ONE_HOUR) - $axis->barOffset),
             0,
             0,
-            (int) date('m', $axis->min),
-            (int) date('d', $axis->min),
-            (int) date('Y', $axis->min)
+            (int) date('m', $axis->minValue),
+            (int) date('d', $axis->minValue),
+            (int) date('Y', $axis->minValue)
         );
 
-        $axis->max = mktime(
+        $axis->maxValue = mktime(
             ($axis->interval / Number::ONE_HOUR) * ceil(date(
                 'H',
-                $axis->max
+                $axis->maxValue
             ) / ($axis->interval / Number::ONE_HOUR) + $axis->barOffset),
             0,
             0,
-            (int) date('m', $axis->max),
-            (int) date('d', $axis->max),
-            (int) date('Y', $axis->max)
+            (int) date('m', $axis->maxValue),
+            (int) date('d', $axis->maxValue),
+            (int) date('Y', $axis->maxValue)
         );
     }
 
     private function determineForLessThanAWeek(Axis $axis): void
     {
-        $axis->dateLabelFormat = (date('Y', $axis->min) !== date('Y', $axis->max))
+        $axis->dateLabelFormat = (date('Y', $axis->minValue) !== date('Y', $axis->maxValue))
             ? '%d %b %Y'
             : '%d %b';
 
@@ -181,33 +182,33 @@ readonly class DateTimeController
         $axis->interval = $this->getBestInterval($axis->roughInterval, $options);
         $axis->subgridCount = $options[$axis->interval];
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
-        $weekdayMin = (int) date('w', $axis->min);
+        $weekdayMin = (int) date('w', $axis->minValue);
         $dtMin = $weekdayMin === 0 ? 6 : $weekdayMin - 1;
 
-        $axis->min = mktime(
+        $axis->minValue = mktime(
             0,
             0,
             0,
-            (int) date('m', $axis->min),
-            date('d', $axis->min) - $dtMin,
-            (int) date('Y', $axis->min)
+            (int) date('m', $axis->minValue),
+            date('d', $axis->minValue) - $dtMin,
+            (int) date('Y', $axis->minValue)
         );
 
-        $dayOffset = (date('H:i:s', $axis->max) > '00:00:00') ? 1 : 0;
+        $dayOffset = (date('H:i:s', $axis->maxValue) > '00:00:00') ? 1 : 0;
 
-        $axis->max = mktime(
+        $axis->maxValue = mktime(
             0,
             0,
             0,
-            (int) date('m', $axis->max),
-            (int) date('d', $axis->max) + $axis->barOffset + $dayOffset,
-            (int) date('Y', $axis->max)
+            (int) date('m', $axis->maxValue),
+            (int) date('d', $axis->maxValue) + $axis->barOffset + $dayOffset,
+            (int) date('Y', $axis->maxValue)
         );
     }
 
     private function determineForLessThanAYear(Axis $axis): void
     {
-        $axis->dateLabelFormat = (date('Y', $axis->min) !== date('Y', $axis->max))
+        $axis->dateLabelFormat = (date('Y', $axis->minValue) !== date('Y', $axis->maxValue))
             ? '%b %Y'
             : '1 %b';
 
@@ -227,22 +228,22 @@ readonly class DateTimeController
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
         $axis->iterationType = IterationType::Monthly;
 
-        $axis->min = mktime(
+        $axis->minValue = mktime(
             0,
             0,
             0,
-            date('m', $axis->min) - $axis->barOffset,
+            date('m', $axis->minValue) - $axis->barOffset,
             1,
-            (int) date('Y', $axis->min)
+            (int) date('Y', $axis->minValue)
         );
 
-        $axis->max = mktime(
+        $axis->maxValue = mktime(
             0,
             0,
             0,
-            (int) date('m', $axis->max) + $axis->barOffset + 1,
+            (int) date('m', $axis->maxValue) + $axis->barOffset + 1,
             0,
-            (int) date('Y', $axis->max)
+            (int) date('Y', $axis->maxValue)
         );
     }
 
@@ -264,8 +265,16 @@ readonly class DateTimeController
         $axis->interval = $this->normalizeInterval($axis, $axis->roughInterval);
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
         $axis->iterationType = IterationType::Yearly;
-        $axis->min = mktime(0, 0, 0, 1, 1, date('Y', $axis->min) - $axis->barOffset);
-        $axis->max = mktime(0, 0, 0, 1, 0, (int) date('Y', $axis->max) + $axis->barOffset + 1);
+        $axis->minValue = mktime(0, 0, 0, 1, 1, date('Y', $axis->minValue) - $axis->barOffset);
+
+        $axis->maxValue = mktime(
+            0,
+            0,
+            0,
+            1,
+            0,
+            (int) date('Y', $axis->maxValue) + $axis->barOffset + 1
+        );
     }
 
     private function normalizeInterval(Axis $axis, float $range): float

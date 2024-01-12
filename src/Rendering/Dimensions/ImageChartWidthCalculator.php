@@ -67,8 +67,13 @@ readonly class ImageChartWidthCalculator
             $chart->imageSettings->width = (int) $imageWidth;
         }
 
-        $chart->grid->xo = $leftPadding + $yAxisWidth;
-        $chart->grid->xm = $leftPadding + $yAxisWidth + $chartWidth;
+        $chart->xAxis->pixelAtOrigin = $chart->grid->xo = $leftPadding + $yAxisWidth;
+
+        $chart->xAxis->pixelAtMaxValue = $chart->grid->xm = $leftPadding
+            + $yAxisWidth
+            + $chartWidth;
+
+        $chart->xAxis->pixelWidth = $chart->xAxis->pixelAtMaxValue - $chart->xAxis->pixelAtOrigin;
     }
 
     private function legendWidth(Chart $chart): float

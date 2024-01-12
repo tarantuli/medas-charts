@@ -62,7 +62,11 @@ readonly class ImageChartHeightCalculator
             $chart->imageSettings->height = (int) $imageHeight;
         }
 
-        $chart->grid->yo = $topPadding + $chartTitleHeight + $chartHeight;
-        $chart->grid->ym = $topPadding + $chartTitleHeight;
+        $chart->yAxis->pixelAtOrigin = $chart->grid->yo = $topPadding
+            + $chartTitleHeight
+            + $chartHeight;
+
+        $chart->yAxis->pixelAtMaxValue = $chart->grid->ym = $topPadding + $chartTitleHeight;
+        $chart->yAxis->pixelWidth = $chart->yAxis->pixelAtMaxValue - $chart->yAxis->pixelAtOrigin;
     }
 }

@@ -19,8 +19,8 @@ readonly class CategorizedController
     public function determineMinMax(Chart $chart, Axis $axis): void
     {
         $axis->categories = $this->dataController->getXs($chart);
-        $axis->min = 0;
-        $axis->max = count($axis->categories) + 1;
+        $axis->minValue = 0;
+        $axis->maxValue = count($axis->categories) + 1;
         $axis->interval = 1;
         $axis->subgridInterval = 1;
         $axis->hasZeroRange = false;

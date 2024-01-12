@@ -24,7 +24,7 @@ readonly class CrossWidthCalculator
             return $axis->crossWidth;
         }
 
-        if ($axis instanceof Y2Axis && $axis->min === null) {
+        if ($axis instanceof Y2Axis && $axis->minValue === null) {
             return $axis->crossWidth = 0.0;
         }
 

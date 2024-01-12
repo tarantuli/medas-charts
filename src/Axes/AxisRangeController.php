@@ -21,13 +21,13 @@ readonly class AxisRangeController
 
     public function calculate(Chart $chart, Axis $axis): void
     {
-        if ($axis->min !== null) {
+        if ($axis->minValue !== null) {
             return;
         }
 
         $this->determineMin($chart, $axis);
 
-        if ($axis instanceof Y2Axis && $axis->min === null) {
+        if ($axis instanceof Y2Axis && $axis->minValue === null) {
             return;
         }
 
@@ -36,12 +36,12 @@ readonly class AxisRangeController
         $this->checkForBlockGraphs($axis);
         $this->applyIntervalType($chart, $axis);
 
-        $axis->range = $axis->max - $axis->min;
+        $axis->valueRange = $axis->maxValue - $axis->minValue;
     }
 
     private function determineMin(Chart $chart, Axis $axis): void
     {
-        if ($axis->min !== null) {
+        if ($axis->minValue !== null) {
             return;
         }
 
@@ -55,12 +55,12 @@ readonly class AxisRangeController
             }
         }
 
-        $axis->min = $mins ? min($mins) : null;
+        $axis->minValue = $mins ? min($mins) : null;
     }
 
     private function determineMax(Chart $chart, Axis $axis): void
     {
-        if ($axis->max !== null) {
+        if ($axis->maxValue !== null) {
             return;
         }
 
@@ -74,16 +74,16 @@ readonly class AxisRangeController
             }
         }
 
-        $axis->max = $maxs ? max($maxs) : null;
+        $axis->maxValue = $maxs ? max($maxs) : null;
     }
 
     private function checkZeroRange(Axis $axis): void
     {
-        if (is_nihil($axis->max - $axis->min)) {
+        if (is_nihil($axis->maxValue - $axis->minValue)) {
             $axis->hasZeroRange = true;
-            $axis->hasZeroRangeAt = $axis->max;
+            $axis->hasZeroRangeAt = $axis->maxValue;
 
-            ++$axis->max;
+            ++$axis->maxValue;
         }
     }
 

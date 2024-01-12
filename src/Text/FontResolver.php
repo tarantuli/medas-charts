@@ -37,6 +37,6 @@ class FontResolver
             return $this->locations[$identifier] = $path;
         }
 
-        throw new \Exception('unknown font ' . $identifier);
+        throw new Exceptions\CannotResolveFont($identifier);
     }
 }

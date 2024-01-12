@@ -11,6 +11,7 @@ class ImageSettings
 {
     public int $height;
     public int $width;
+    public float|int $scalingFactor;
     public Color $backgroundColor;
     public FourSides $padding;
     public SizeLock $sizeLock;

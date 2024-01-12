@@ -37,7 +37,6 @@ readonly class ChartSettingsFactory
         $settings->colorScheme = $this->excel2007;
         $settings->gridColor = $this->manager->fromHtmlString('#c0c0d1');
         $settings->subGridColor = $this->manager->fromHtmlString('#dfdff2');
-        $settings->pseudoAntialiasingFactor = 4;
         $settings->showTitle = true;
         $settings->showLegend = false;
         $settings->isOnY2NameMarker = /** ► */ ' &#9658;';

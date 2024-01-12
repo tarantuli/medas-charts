@@ -17,7 +17,6 @@ class ChartSettings
     public ColorScheme $colorScheme;
     public Color $gridColor;
     public Color $subGridColor;
-    public float|int $pseudoAntialiasingFactor;
     public string $isOnY2NameMarker;
 
     // Show toggles

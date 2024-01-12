@@ -100,12 +100,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-image-manager.git",
-                "reference": "82a8437a629859e4b8abfb258d752e10625c1846"
+                "reference": "51eff9ed047a159f58e76f741a9f79e5fcc7f3df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-image-manager/zipball/82a8437a629859e4b8abfb258d752e10625c1846",
-                "reference": "82a8437a629859e4b8abfb258d752e10625c1846",
+                "url": "https://api.github.com/repos/tarantuli/medas-image-manager/zipball/51eff9ed047a159f58e76f741a9f79e5fcc7f3df",
+                "reference": "51eff9ed047a159f58e76f741a9f79e5fcc7f3df",
                 "shasum": ""
             },
             "require": {
@@ -136,7 +136,7 @@
                 "source": "https://github.com/tarantuli/medas-image-manager/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-image-manager/issues"
             },
-            "time": "2023-12-24T14:58:39+00:00"
+            "time": "2024-01-12T11:18:30+00:00"
         },
         {
             "name": "psr/event-dispatcher",

@@ -19,28 +19,28 @@ readonly class NumericController
             return;
         }
 
-        $axis->min = (floor($axis->min / $axis->interval + Number::SMALL_POSITIVE) - $axis->barOffset)
+        $axis->minValue = (floor($axis->minValue / $axis->interval + Number::SMALL_POSITIVE) - $axis->barOffset)
             * $axis->interval;
 
-        $axis->max = (floor($axis->max / $axis->interval - Number::SMALL_POSITIVE) + $axis->barOffset + 1)
+        $axis->maxValue = (floor($axis->maxValue / $axis->interval - Number::SMALL_POSITIVE) + $axis->barOffset + 1)
             * $axis->interval;
 
         /*
         If both min and max are positive numbers, and min is 20% of max or less, set min to 0
         Likewise if both are negative numbers
         */
-        if ($axis->min > 0 && $axis->max > 0 && 5 * $axis->min <= $axis->max) {
-            $axis->min = 0;
+        if ($axis->minValue > 0 && $axis->maxValue > 0 && 5 * $axis->minValue <= $axis->maxValue) {
+            $axis->minValue = 0;
         }
 
-        if ($axis->min < 0 && $axis->max < 0 && 5 * $axis->max <= $axis->min) {
-            $axis->max = 0;
+        if ($axis->minValue < 0 && $axis->maxValue < 0 && 5 * $axis->maxValue <= $axis->minValue) {
+            $axis->maxValue = 0;
         }
     }
 
     private function normalizeInterval(Axis $axis): float
     {
-        $range = $axis->max - $axis->min;
+        $range = $axis->maxValue - $axis->minValue;
 
         if (Number::isZeroOrLess($range)) {
             $axis->subgridCount = 1;

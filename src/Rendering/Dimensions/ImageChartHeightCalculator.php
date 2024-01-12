@@ -11,7 +11,7 @@ use Medas\Charts\Rendering\Exceptions\ImageNotHighEnough;
 use Medas\Core\Attributes\Service;
 
 #[Service]
-readonly class YAxisRangeCalculator
+readonly class ImageChartHeightCalculator
 {
     public function __construct(
         private CrossWidthCalculator        $crossWidthCalculator,
@@ -32,7 +32,7 @@ readonly class YAxisRangeCalculator
          */
         $topPadding = $chart->imageSettings->padding->top;
         $chartTitleHeight = $this->titleHeightCalculator->calculate($chart);
-        $xAxisHeight = $this->crossWidthCalculator->totalWidth($chart->xAxis);
+        $xAxisHeight = $this->crossWidthCalculator->calculate($chart->xAxis);
         $bottomPadding = $chart->imageSettings->padding->bottom;
 
         if ($chart->imageSettings->sizeLock === SizeLock::ImageSize) {
@@ -45,7 +45,7 @@ readonly class YAxisRangeCalculator
                 - $bottomPadding;
 
             if ($chartHeight < 1) {
-                throw new ImageNotHighEnough();
+                throw new ImageNotHighEnough($imageHeight, $chartHeight);
             }
 
             $chart->chartSettings->height = (int) $chartHeight;

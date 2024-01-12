@@ -11,9 +11,9 @@ use Medas\Core\Attributes\Service;
 readonly class DimensionsCalculator
 {
     public function __construct(
-        private AxisRangeController             $axisRangeController,
-        private Dimensions\XAxisRangeCalculator $XAxisRangeCalculator,
-        private Dimensions\YAxisRangeCalculator $YAxisRangeCalculator,
+        private AxisRangeController                   $axisRangeController,
+        private Dimensions\ImageChartWidthCalculator  $imageChartWidthCalculator,
+        private Dimensions\ImageChartHeightCalculator $imageChartHeightCalculator,
     )
     {
     }
@@ -22,11 +22,13 @@ readonly class DimensionsCalculator
     {
         // X-axis
         $this->axisRangeController->calculate($chart, $chart->xAxis);
-        $this->XAxisRangeCalculator->calculate($chart);
 
         // Y-axes
         $this->axisRangeController->calculate($chart, $chart->yAxis);
         $this->axisRangeController->calculate($chart, $chart->y2Axis);
-        $this->YAxisRangeCalculator->calculate($chart);
+
+        // Image and chart width and height
+        $this->imageChartWidthCalculator->calculate($chart);
+        $this->imageChartHeightCalculator->calculate($chart);
     }
 }

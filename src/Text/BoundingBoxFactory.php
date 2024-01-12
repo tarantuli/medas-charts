@@ -9,9 +9,15 @@ use Medas\Core\Attributes\Service;
 #[Service]
 readonly class BoundingBoxFactory
 {
+    public function __construct(
+        private FontResolver $fontResolver,
+    )
+    {
+    }
+
     public function create(string $text, string $font, float $size, float $angle = 0.0): BoundingBox
     {
-        $bbox = imageftbbox($size, $angle, $font, $text);
+        $bbox = imageftbbox($size, $angle, $this->fontResolver->resolve($font), $text);
 
         return new BoundingBox(
             $bbox[Coordinate::LowerLeftX->value],

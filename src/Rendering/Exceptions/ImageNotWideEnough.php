@@ -8,9 +8,13 @@ use Medas\Core\Exceptions\BaseException;
 
 class ImageNotWideEnough extends BaseException
 {
+    public function __construct(int $imageWidth, float $chartWidth)
+    {
+        parent::__construct(ceil($chartWidth), $imageWidth);
+    }
+
     public function pattern(): string
     {
-        // TODO
-        return 'image not wide enough';
+        return 'image not wide enough, need %d more than the given width of %d';
     }
 }

@@ -24,7 +24,7 @@ abstract class Axis
 
     // Labels
     public int $decimalCount;
-    public string|null $dateLabelFormat = null;
+    public string|null $dateLabelFormat;
     public /** @var Labels\Label[] */ array $labels;
 
     // Zero range

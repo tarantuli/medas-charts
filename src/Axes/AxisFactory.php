@@ -56,6 +56,7 @@ readonly class AxisFactory
         );
 
         $axis->iterationType = IntervalTypes\IterationType::Linear;
+        $axis->hasZeroRange = false;
 
         return $axis;
     }
@@ -82,6 +83,7 @@ readonly class AxisFactory
         );
 
         $axis->iterationType = IntervalTypes\IterationType::Linear;
+        $axis->hasZeroRange = false;
 
         return $axis;
     }

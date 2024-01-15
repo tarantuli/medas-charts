@@ -11,6 +11,7 @@ class ChartSettings
 {
     public int $height;
     public int $width;
+    public string $locale;
     public string|null $title;
     public TextSettings $titleSettings;
     public float $allowedDataGridOverflow;

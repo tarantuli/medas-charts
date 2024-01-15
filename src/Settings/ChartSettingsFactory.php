@@ -24,6 +24,7 @@ readonly class ChartSettingsFactory
 
         $settings->height = 200;
         $settings->width = 300;
+        $settings->locale = locale_get_default();
         $settings->title = null;
 
         $settings->titleSettings = new TextSettings(

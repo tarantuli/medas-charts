@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Rendering;
 
-use Medas\Charts\Axes\AxeDrawer;
+use Medas\Charts\Axes\{AxeDrawer, Labels\LabelDrawer};
 use Medas\Charts\Chart;
 use Medas\Charts\Grid\GridDrawer;
 use Medas\Charts\Image\{Image, ImageFactory, Size\Resizer};
@@ -16,6 +16,7 @@ readonly class Renderer
     public function __construct(
         private AxeDrawer            $axeDrawer,
         private DimensionsCalculator $dimensionsCalculator,
+        private LabelDrawer          $labelDrawer,
         private ImageFactory         $imageFactory,
         private GridDrawer           $gridDrawer,
         private Resizer              $resizer,
@@ -32,15 +33,32 @@ readonly class Renderer
         $job->image = $this->imageFactory->create($chart);
 
         // Draw non-textual elements with alpha blending turned off
-        $this->gridDrawer->draw($job);
-        $this->axeDrawer->draw($job);
+        $this->drawNonTextualElements($job);
 
         // Undo the scaling factor and turn on alpha blending before drawing text elements
+        $this->undoScalingFactor($job);
+
+        // Draw textual elements
+        $this->drawTextualElements($job);
+
+        return $job->image;
+    }
+
+    private function drawNonTextualElements(Job $job): void
+    {
+        $this->gridDrawer->draw($job);
+        $this->axeDrawer->draw($job);
+    }
+
+    private function undoScalingFactor(Job $job): void
+    {
         $this->resizer->undoScalingFactor($job->image);
 
         imagealphablending($job->image->resource, true);
+    }
 
-        // Draw textual elements
-        return $job->image;
+    private function drawTextualElements(Job $job): void
+    {
+        $this->labelDrawer->draw($job);
     }
 }

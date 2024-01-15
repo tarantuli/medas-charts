@@ -39,8 +39,7 @@ readonly class CrossWidthCalculator
         if ($axis->settings->showTitle && strlen($axis->settings->title ?? '') >= 1) {
             $height = $this->boundingBoxFactory->create(
                 $axis->settings->title,
-                $axis->settings->titleSettings->font,
-                $axis->settings->titleSettings->size,
+                $axis->settings->titleSettings
             )->height;
 
             $titleWidth = $height + $axis->settings->titleSettings->margin;
@@ -58,12 +57,11 @@ readonly class CrossWidthCalculator
         $previousLabel = null;
 
         foreach ($this->labelController->labels($axis) as $label) {
-            $text = $this->labelFormatter->format($label, $previousLabel);
+            $text = $this->labelFormatter->format($axis, $label, $previousLabel);
 
             $width = $this->boundingBoxFactory->create(
                 $text,
-                $axis->settings->labelSettings->font,
-                $axis->settings->labelSettings->size
+                $axis->settings->labelSettings
             )->width;
 
             if ($width > $maxWidth) {

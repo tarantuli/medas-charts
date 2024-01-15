@@ -34,8 +34,7 @@ readonly class DimensionsCalculator
         foreach ($chart->data as $dataset) {
             $length = $this->boundingBoxFactory->create(
                 $dataset->getName(),
-                $chart->legendSettings->labelSettings->font,
-                $chart->legendSettings->labelSettings->size,
+                $chart->legendSettings->labelSettings
             )->width;
 
             $maxLength = max($maxLength, $length);

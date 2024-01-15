@@ -28,8 +28,7 @@ readonly class TitleHeightCalculator
 
         $height = $this->boundingBoxFactory->create(
             $chart->chartSettings->title,
-            $chart->chartSettings->titleSettings->font,
-            $chart->chartSettings->titleSettings->size,
+            $chart->chartSettings->titleSettings
         )->height;
 
         return $chart->titleHeight = $height + $chart->chartSettings->titleSettings->margin;

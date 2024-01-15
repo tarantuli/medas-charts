@@ -47,5 +47,7 @@ readonly class Resizer
             (int) round(imagesx($image->resource) / $image->scalingFactor),
             (int) round(imagesy($image->resource) / $image->scalingFactor),
         );
+
+        $image->scalingFactor = 1.0;
     }
 }

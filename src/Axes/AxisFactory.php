@@ -23,8 +23,8 @@ readonly class AxisFactory
 
         $settings->color = $this->colorManager->fromHtmlString('#000');
         $settings->showTicks = true;
-        $settings->tickLength = 2.0;
-        $settings->tickMargin = 5.0;
+        $settings->tickLength = 3.0;
+        $settings->tickMargin = 3.0;
         $settings->showLabels = true;
         $settings->showTitle = true;
 

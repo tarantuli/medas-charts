@@ -32,7 +32,10 @@ readonly class LabelFormatter
         }
 
         if ($axis->settings->intervalType === IntervalType::DateTime) {
-            $formatter = new \IntlDateFormatter(locale_get_default(), pattern: $axis->dateLabelFormat);
+            $formatter = new \IntlDateFormatter(
+                locale_get_default(),
+                pattern: $axis->dateLabelFormat
+            );
 
             if ($previousLabel !== null && str_contains($axis->dateLabelFormat, 'dd')) {
                 $previousDate = date('Ymd', $previousLabel->value);

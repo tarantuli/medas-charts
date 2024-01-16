@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52b288e2604bf0ba30b35e278fcf7c08",
+    "content-hash": "1d932b7398bca3399310e59f47868170",
     "packages": [
         {
             "name": "morphp/medas-core",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-core.git",
-                "reference": "64d77165ec2ab72d9931ed83b0116081251a9128"
+                "reference": "95b1770eb637e7a00bb9a63e88fb530e05d3888d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-core/zipball/64d77165ec2ab72d9931ed83b0116081251a9128",
-                "reference": "64d77165ec2ab72d9931ed83b0116081251a9128",
+                "url": "https://api.github.com/repos/tarantuli/medas-core/zipball/95b1770eb637e7a00bb9a63e88fb530e05d3888d",
+                "reference": "95b1770eb637e7a00bb9a63e88fb530e05d3888d",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
                 "source": "https://github.com/tarantuli/medas-core/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-core/issues"
             },
-            "time": "2023-12-24T14:58:00+00:00"
+            "time": "2024-01-16T16:02:41+00:00"
         },
         {
             "name": "morphp/medas-file-system",
@@ -2769,7 +2769,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "ext-intl": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

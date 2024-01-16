@@ -15,4 +15,10 @@ readonly class Pixelator
         return $axis->pixelAtOrigin
             + $axis->pixelWidth * ($value - $axis->minValue) / $axis->valueRange;
     }
+
+    public function coordinateToValue(Axis $axis, float $coordinate): float
+    {
+        return $axis->minValue
+            + $axis->valueRange * ($coordinate - $axis->pixelAtOrigin) / $axis->pixelWidth;
+    }
 }

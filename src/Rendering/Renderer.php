@@ -6,6 +6,7 @@ namespace Medas\Charts\Rendering;
 
 use Medas\Charts\Axes\{AxeDrawer, Labels\LabelDrawer};
 use Medas\Charts\Chart;
+use Medas\Charts\Graphs\Drawers\GraphsDrawer;
 use Medas\Charts\Grid\GridDrawer;
 use Medas\Charts\Image\{Image, ImageFactory, Size\Resizer};
 use Medas\Core\Attributes\Service;
@@ -16,9 +17,10 @@ readonly class Renderer
     public function __construct(
         private AxeDrawer            $axeDrawer,
         private DimensionsCalculator $dimensionsCalculator,
-        private LabelDrawer          $labelDrawer,
-        private ImageFactory         $imageFactory,
+        private GraphsDrawer         $graphsDrawer,
         private GridDrawer           $gridDrawer,
+        private ImageFactory         $imageFactory,
+        private LabelDrawer          $labelDrawer,
         private Resizer              $resizer,
     )
     {
@@ -48,6 +50,7 @@ readonly class Renderer
     {
         $this->gridDrawer->draw($job);
         $this->axeDrawer->draw($job);
+        $this->graphsDrawer->draw($job);
     }
 
     private function undoScalingFactor(Job $job): void

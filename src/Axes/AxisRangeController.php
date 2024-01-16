@@ -81,7 +81,7 @@ readonly class AxisRangeController
     {
         if (is_nihil($axis->maxValue - $axis->minValue)) {
             $axis->hasZeroRange = true;
-            $axis->hasZeroRangeAt = $axis->maxValue;
+            $axis->hasZeroRangeAt = $axis->maxValue ?? 0.0;
 
             ++$axis->maxValue;
         }

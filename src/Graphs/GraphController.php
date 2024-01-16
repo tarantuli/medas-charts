@@ -11,7 +11,8 @@ use Medas\Core\Attributes\Service;
 readonly class GraphController
 {
     public function __construct(
-        private DataController $dataController,
+        private DataController         $dataController,
+        private Lines\LineGraphFactory $lineGraphFactory,
     )
     {
     }
@@ -24,7 +25,13 @@ readonly class GraphController
         YAxisType $YAxisType = YAxisType::Y
     ): void
     {
-        $graph = new $graphType($YAxisType, $dataName, ...$graphArguments);
+        if ($graphType === Lines\LineGraph::class) {
+            $graph = $this->lineGraphFactory->create($YAxisType, $dataName);
+        }
+        else {
+            $graph = new $graphType($YAxisType, $dataName, ...$graphArguments);
+        }
+
         $chart->graphs[] = $graph;
     }
 

@@ -2,17 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Graphs\Lines;
+namespace Medas\Charts\Graphs\BarGraph;
 
-use Medas\Charts\Graphs\{Graph, Markers\MarkerSettings, YAxisType};
+use Medas\Charts\Graphs\{Graph, YAxisType};
 
-class LineGraph extends Graph
+class BarGraph extends Graph
 {
-    public bool $showLine;
-    public LineSettings $lineSettings;
-    public bool $showMarkers;
-    public MarkerSettings $markerSettings;
-
     public function __construct(
         YAxisType   $YAxisType,
         string      $dataName,

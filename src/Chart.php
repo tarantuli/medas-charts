@@ -33,9 +33,11 @@ class Chart
     public float $titleHeight;
 
     // Data
-    public /** @var Data\Data[] */ array $data = [];
+    /** @var Data\Data[] */
+    public array $data = [];
     public Data\Range2D $range2D;
 
     // Graphs
-    public /** @var Graphs\Graph[] */ array $graphs = [];
+    /** @var Graphs\Graph[] */
+    public array $graphs = [];
 }

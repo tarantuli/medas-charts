@@ -17,7 +17,7 @@ class ChartRenderTest extends TestCase
     public function testRender(): void
     {
         $chart = service(ChartFactory::class)->create(
-            new KeyToValueArray([1 => 1, 4 => 2, 5 => 3]),
+            new KeyToValueArray([1 => .1, 4 => 2, 5 => 2.8]),
             LineGraph::class
         );
 
@@ -26,7 +26,6 @@ class ChartRenderTest extends TestCase
         $image = service(Renderer::class)->render($chart);
 
         self::assertInstanceOf(Image::class, $image);
-        funcdump($chart);
 
         imagepng($image->resource, 'var/test-output.png');
     }

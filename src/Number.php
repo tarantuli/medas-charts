@@ -37,9 +37,19 @@ class Number
         return $a < 0 || is_nihil($a);
     }
 
+    public static function isZeroOrMore(float $a): bool
+    {
+        return $a > 0 || is_nihil($a);
+    }
+
     public static function isBetweenInclusive(float $left, float $value, float $right): bool
     {
         return self::isMoreThanOrEqual($value, min($left, $right))
             && self::isLessThanOrEqual($value, max($left, $right));
+    }
+
+    public static function isMoreThanZero(float $a): bool
+    {
+        return !is_nihil($a) && $a > 0;
     }
 }

@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Medas\Charts\Graphs\Markers;
 
 use Medas\Core\Attributes\Service;
+use Medas\ImageManager\ColorManager;
 
 #[Service]
 readonly class MarkerSettingsFactory
 {
     public function __construct(
-        private Types\SquareMarker $squareMarker,
+        private ColorManager $colorManager,
     )
     {
     }
@@ -19,8 +20,9 @@ readonly class MarkerSettingsFactory
     {
         $settings = new MarkerSettings();
 
-        $settings->size = 4;
-        $settings->type = $this->squareMarker;
+        $settings->size = 5;
+        $settings->type = new Types\CircleMarker();
+        $settings->color = $this->colorManager->fromHtmlString('#4572A7');
 
         return $settings;
     }

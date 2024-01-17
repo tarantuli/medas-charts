@@ -20,7 +20,7 @@ readonly class LineSettingsFactory
     {
         $settings = new LineSettings();
 
-        $settings->color = $this->colorManager->fromHtmlString('#00f');
+        $settings->color = $this->colorManager->fromHtmlString('#4572A7');
         $settings->disconnectLimit = 2;
         $settings->thickness = 1;
         $settings->subCurveWidth = 0;

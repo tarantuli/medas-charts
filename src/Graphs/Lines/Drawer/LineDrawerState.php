@@ -8,6 +8,5 @@ class LineDrawerState
 {
     public float|null $prevX = null;
     public float|null $prevY = null;
-    public float|null $prevKey = null;
     public bool $prevXIsUnconnected = false;
 }

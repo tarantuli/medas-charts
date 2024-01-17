@@ -63,22 +63,39 @@ readonly class LineDrawer
         $gapLimit = $this->determineGapLimit($graph, $chart, $data);
 
         foreach ($values as $set) {
-            [$key, , $x, $y] = $set;
+            [$x, $y] = $set;
 
-            if ($state->prevX !== null && $state->prevY !== null && (!$gapLimit || $key - $state->prevKey <= $gapLimit)) {
+            if ($state->prevX !== null
+                    && $state->prevY !== null
+                    && ($gapLimit === null || $x - $state->prevX <= $gapLimit)) {
                 if ($drawSquaredLine) {
-                    $this->imageLineDrawer->draw($image, $state->prevX, $state->prevY, $x, $state->prevY, $color);
+                    $this->imageLineDrawer->draw(
+                        $image,
+                        $state->prevX,
+                        $state->prevY,
+                        $x,
+                        $state->prevY,
+                        $color
+                    );
+
                     $this->imageLineDrawer->draw($image, $x, $state->prevY, $x, $y, $color);
                 }
                 else {
-                    $this->imageLineDrawer->draw($image, $state->prevX, $state->prevY, $x, $y, $color);
+                    $this->imageLineDrawer->draw(
+                        $image,
+                        $state->prevX,
+                        $state->prevY,
+                        $x,
+                        $y,
+                        $color
+                    );
                 }
 
                 $state->prevXIsUnconnected = false;
             }
             else {
                 if ($state->prevXIsUnconnected) {
-                    $this->markerDrawer->drawMarker($state->prevX, $state->prevY);
+                    $this->markerDrawer->drawMarker($job, $graph, $state->prevX, $state->prevY);
                 }
 
                 $state->prevXIsUnconnected = true;
@@ -86,11 +103,10 @@ readonly class LineDrawer
 
             $state->prevX = $x;
             $state->prevY = $y;
-            $state->prevKey = $key;
         }
 
         if ($state->prevXIsUnconnected) {
-            $this->markerDrawer->drawMarker($state->prevX, $state->prevY);
+            $this->markerDrawer->drawMarker($job, $graph, $state->prevX, $state->prevY);
         }
     }
 
@@ -129,8 +145,6 @@ readonly class LineDrawer
 
             foreach ($newValues as $x => $value) {
                 $values[] = [
-                    $this->pixelator->coordinateToValue($xAxis, $x),
-                    $value,
                     $x,
                     $this->pixelator->valueToCoordinate($yAxis, $value),
                 ];
@@ -140,27 +154,29 @@ readonly class LineDrawer
             foreach ($data->values() as $key => $value) {
                 $x = $this->pixelator->valueToCoordinate($xAxis, $key);
                 $y = $this->pixelator->valueToCoordinate($yAxis, $value);
-                $values[] = [$key, $value, $x, $y];
+                $values[] = [$x, $y];
             }
         }
 
         return $values;
     }
 
-    private function determineGapLimit(LineGraph $graph, Chart $chart, Data $data): float|false
+    private function determineGapLimit(LineGraph $graph, Chart $chart, Data $data): float|null
     {
         $gapLimit = $graph->lineSettings->gapLimit ?? $chart->lineSettings->gapLimit;
 
         if (is_nihil($gapLimit)) {
-            return false;
+            return null;
         }
-        else {
-            try {
-                return $gapLimit * $this->intervalCalculator->calculate($data);
-            }
-            catch (\Exception) {
-                return 0;
-            }
+
+        try {
+            return $this->pixelator->valueToCoordinate(
+                $chart->xAxis,
+                $gapLimit * $this->intervalCalculator->calculate($data)
+            );
+        }
+        catch (\Exception) {
+            return null;
         }
     }
 }

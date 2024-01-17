@@ -17,7 +17,7 @@ class ChartRenderTest extends TestCase
     public function testRender(): void
     {
         $chart = service(ChartFactory::class)->create(
-            new KeyToValueArray([1 => .1, 4 => 2, 5 => 2.8]),
+            new KeyToValueArray([1 => .1, 4 => 1.2, 5 => 2.8]),
             LineGraph::class
         );
 

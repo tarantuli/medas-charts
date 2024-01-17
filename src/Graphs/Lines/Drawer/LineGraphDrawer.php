@@ -28,6 +28,7 @@ readonly class LineGraphDrawer implements GraphDrawer
         if (!$graph instanceof LineGraph) {
             return false;
         }
+
         if ($graph->showLine) {
             $this->lineDrawer->draw($job, $graph);
         }

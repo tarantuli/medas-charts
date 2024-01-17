@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Settings;
 
-use Medas\Charts\{Colors\Excel2007, General\TextSettings};
+use Medas\Charts\Colors\Excel2007\Excel2007;
+use Medas\Charts\General\TextSettings;
 use Medas\Core\Attributes\Service;
 use Medas\ImageManager\ColorManager;
 
@@ -13,7 +14,6 @@ readonly class ChartSettingsFactory
 {
     public function __construct(
         private ColorManager $manager,
-        private Excel2007    $excel2007,
     )
     {
     }
@@ -35,7 +35,7 @@ readonly class ChartSettingsFactory
         );
 
         $settings->allowedDataGridOverflow = 5.0;
-        $settings->colorScheme = $this->excel2007;
+        $settings->colorScheme = new Excel2007();
         $settings->gridColor = $this->manager->fromHtmlString('#c0c0d1');
         $settings->subGridColor = $this->manager->fromHtmlString('#dfdff2');
         $settings->showTitle = true;

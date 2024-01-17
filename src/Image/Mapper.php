@@ -8,7 +8,7 @@ use Medas\Charts\Axes\Axis;
 use Medas\Core\Attributes\Service;
 
 #[Service]
-readonly class Pixelator
+readonly class Mapper
 {
     public function valueToCoordinate(Axis $axis, float $value): float
     {

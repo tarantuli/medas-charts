@@ -2,26 +2,38 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Graphs\Markers\Types;
+namespace Medas\Charts\Graphs\Markers\Types\Squares;
 
+use Medas\Charts\Colors\ColorGenerator;
 use Medas\Charts\Graphs\Lines\LineGraph;
+use Medas\Charts\Graphs\Markers\Types\{MarkerType, TypeDrawer};
 use Medas\Charts\Image\Drawers\FilledRectangleDrawer;
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
 
 #[Service]
-readonly class SquareMarkerDrawer
+readonly class SquareDrawer implements TypeDrawer
 {
     public function __construct(
+        private ColorGenerator        $colorGenerator,
         private FilledRectangleDrawer $filledRectangleDrawer,
     )
     {
     }
 
-    public function draw(Job $job, LineGraph $graph, float $x, float $y): void
+    public function priority(): int
     {
+        return 0;
+    }
+
+    public function handle(Job $job, LineGraph $graph, MarkerType $type, float $x, float $y): bool
+    {
+        if (!$type instanceof Square) {
+            return false;
+        }
+
         $size = $graph->markerSettings->size ?? $job->chart->markerSettings->size;
-        $color = $graph->markerSettings->color ?? $job->chart->markerSettings->color;
+        $color = $graph->markerSettings->color ?? $graph->color ?? $this->colorGenerator->generate($job);
 
         $this->filledRectangleDrawer->draw(
             $job->image,
@@ -31,5 +43,7 @@ readonly class SquareMarkerDrawer
             $y + $size / 2,
             $color
         );
+
+        return true;
     }
 }

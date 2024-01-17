@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes\Labels;
 
-use Medas\Charts\Image\{Drawers\FilledRectangleDrawer, Drawers\TextDrawer, Pixelator};
+use Medas\Charts\Image\{Drawers\FilledRectangleDrawer, Drawers\TextDrawer, Mapper};
 use Medas\Charts\Number;
 use Medas\Charts\Rendering\Job;
 use Medas\Charts\Text\BoundingBoxFactory;
@@ -18,7 +18,7 @@ readonly class LabelDrawer
         private BoundingBoxFactory    $boundingBoxFactory,
         private FilledRectangleDrawer $filledRectangleDrawer,
         private LabelController       $labelController,
-        private Pixelator             $pixelator,
+        private Mapper                $mapper,
         private TextDrawer            $textDrawer,
     )
     {
@@ -47,14 +47,14 @@ readonly class LabelDrawer
         $axis = $job->chart->xAxis;
         $grid = $job->chart->grid;
         $labelSettings = $axis->settings->labelSettings;
-        $y = $this->pixelator->valueToCoordinate($job->chart->yAxis, 0);
+        $y = $this->mapper->valueToCoordinate($job->chart->yAxis, 0);
 
         if (!Number::isBetweenInclusive($grid->yo, $y, $grid->ym)) {
             $y = $grid->yo;
         }
 
         foreach ($this->labelController->labels($axis) as $label) {
-            $x = $this->pixelator->valueToCoordinate($axis, $label->value);
+            $x = $this->mapper->valueToCoordinate($axis, $label->value);
             $bbox = $this->boundingBoxFactory->create($label->formatted, $labelSettings);
 
             $this->filledRectangleDrawer->draw(
@@ -81,14 +81,14 @@ readonly class LabelDrawer
         $axis = $job->chart->yAxis;
         $grid = $job->chart->grid;
         $labelSettings = $axis->settings->labelSettings;
-        $x = $this->pixelator->valueToCoordinate($job->chart->xAxis, 0);
+        $x = $this->mapper->valueToCoordinate($job->chart->xAxis, 0);
 
         if (!Number::isBetweenInclusive($grid->xo, $x, $grid->xm)) {
             $x = $grid->xo;
         }
 
         foreach ($this->labelController->labels($axis) as $label) {
-            $y = $this->pixelator->valueToCoordinate($axis, $label->value);
+            $y = $this->mapper->valueToCoordinate($axis, $label->value);
             $bbox = $this->boundingBoxFactory->create($label->formatted, $labelSettings);
 
             $this->filledRectangleDrawer->draw(
@@ -120,14 +120,14 @@ readonly class LabelDrawer
 
         $grid = $job->chart->grid;
         $labelSettings = $axis->settings->labelSettings;
-        $x = $this->pixelator->valueToCoordinate($job->chart->xAxis, 0);
+        $x = $this->mapper->valueToCoordinate($job->chart->xAxis, 0);
 
         if (!Number::isBetweenInclusive($grid->xo, $x, $grid->xm)) {
             $x = $grid->xm;
         }
 
         foreach ($this->labelController->labels($axis) as $label) {
-            $y = $this->pixelator->valueToCoordinate($axis, $label->value);
+            $y = $this->mapper->valueToCoordinate($axis, $label->value);
             $bbox = $this->boundingBoxFactory->create($label->formatted, $labelSettings);
 
             $this->filledRectangleDrawer->draw(

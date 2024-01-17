@@ -11,10 +11,8 @@ readonly class ChartFactory
 {
     public function __construct(
         private Axes\AxisFactory                          $axisFactory,
-        private Data\DataController                       $dataController,
         private Data\DataSettingsFactory                  $dataSettingsFactory,
         private Graphs\BarGraph\BarGraphSettingsFactory   $barGraphSettingsFactory,
-        private Graphs\GraphController                    $graphController,
         private Graphs\GraphSettingsFactory               $graphSettingsFactory,
         private Graphs\Histogram\HistogramSettingsFactory $histogramSettingsFactory,
         private Graphs\Lines\LineSettingsFactory          $lineSettingsFactory,
@@ -29,11 +27,7 @@ readonly class ChartFactory
     {
     }
 
-    public function create(
-        Data\Data $data = null,
-        string    $graphType = null,
-        array     $graphArguments = [],
-    ): Chart
+    public function create(): Chart
     {
         $chart = new Chart();
 
@@ -59,15 +53,6 @@ readonly class ChartFactory
         $chart->histogramSettings = $this->histogramSettingsFactory->create();
         $chart->lineSettings = $this->lineSettingsFactory->create();
         $chart->markerSettings = $this->markerSettingsFactory->create();
-
-        // Optional data and graph arguments
-        if ($data) {
-            $dataName = $this->dataController->add($chart, $data);
-
-            if ($graphType) {
-                $this->graphController->add($chart, $dataName, $graphType, $graphArguments);
-            }
-        }
 
         return $chart;
     }

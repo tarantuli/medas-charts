@@ -20,8 +20,8 @@ readonly class MarkerSettingsFactory
     {
         $settings = new MarkerSettings();
 
-        $settings->size = 5;
-        $settings->type = new Types\CircleMarker();
+        $settings->size = 8;
+        $settings->type = new Types\Circles\Circle();
         $settings->color = $this->colorManager->fromHtmlString('#4572A7');
 
         return $settings;

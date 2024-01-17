@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes;
 
-use Medas\Charts\Image\{Drawers\LineDrawer, Pixelator};
+use Medas\Charts\Image\{Drawers\LineDrawer, Mapper};
 use Medas\Charts\Number;
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
@@ -13,7 +13,7 @@ use Medas\Core\Attributes\Service;
 readonly class AxeDrawer
 {
     public function __construct(
-        private Pixelator              $pixelator,
+        private Mapper                 $mapper,
         private LineDrawer             $lineDrawer,
         private Labels\LabelController $labelController,
     )
@@ -30,7 +30,7 @@ readonly class AxeDrawer
     {
         $grid = $job->chart->grid;
         $xAxis = $job->chart->xAxis;
-        $y = $this->pixelator->valueToCoordinate($job->chart->yAxis, 0);
+        $y = $this->mapper->valueToCoordinate($job->chart->yAxis, 0);
 
         if (!Number::isBetweenInclusive($grid->yo, $y, $grid->yo)) {
             $y = $grid->yo;
@@ -40,7 +40,7 @@ readonly class AxeDrawer
 
         if ($xAxis->settings->showTicks) {
             foreach ($this->labelController->labels($xAxis) as $label) {
-                $x = $this->pixelator->valueToCoordinate($xAxis, $label->value);
+                $x = $this->mapper->valueToCoordinate($xAxis, $label->value);
 
                 $this->lineDrawer->draw(
                     $job->image,
@@ -58,7 +58,7 @@ readonly class AxeDrawer
     {
         $grid = $job->chart->grid;
         $yAxis = $job->chart->yAxis;
-        $x = $this->pixelator->valueToCoordinate($job->chart->xAxis, 0);
+        $x = $this->mapper->valueToCoordinate($job->chart->xAxis, 0);
 
         if (!Number::isBetweenInclusive($grid->xo, $x, $grid->xo)) {
             $x = $grid->xo;
@@ -68,7 +68,7 @@ readonly class AxeDrawer
 
         if ($yAxis->settings->showTicks) {
             foreach ($this->labelController->labels($yAxis) as $label) {
-                $y = $this->pixelator->valueToCoordinate($yAxis, $label->value);
+                $y = $this->mapper->valueToCoordinate($yAxis, $label->value);
 
                 $this->lineDrawer->draw(
                     $job->image,

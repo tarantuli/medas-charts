@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Medas\Charts\Grid;
 
 use Medas\Charts\Axes\Labels\{LabelController, SubLabelController};
-use Medas\Charts\Image\{Drawers\LineDrawer, Pixelator};
+use Medas\Charts\Image\{Drawers\LineDrawer, Mapper};
 use Medas\Charts\Number;
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
@@ -17,7 +17,7 @@ readonly class GridDrawer
         private LabelController    $labelController,
         private LineDrawer         $lineDrawer,
         private SubLabelController $subLabelController,
-        private Pixelator          $pixelator,
+        private Mapper             $mapper,
     )
     {
     }
@@ -37,7 +37,7 @@ readonly class GridDrawer
 
         foreach ($this->labelController->labels($xAxis) as $label) {
             foreach ($this->subLabelController->labels($xAxis, $label->value - $xAxis->minValue) as $subLabel) {
-                $x = $this->pixelator->valueToCoordinate($xAxis, $subLabel->value);
+                $x = $this->mapper->valueToCoordinate($xAxis, $subLabel->value);
 
                 if (Number::isMoreThanOrEqual($x, $chart->grid->xm)) {
                     break;
@@ -63,7 +63,7 @@ readonly class GridDrawer
 
         foreach ($this->labelController->labels($yAxis) as $label) {
             foreach ($this->subLabelController->labels($yAxis, $label->value - $yAxis->minValue) as $subLabel) {
-                $y = $this->pixelator->valueToCoordinate($yAxis, $subLabel->value);
+                $y = $this->mapper->valueToCoordinate($yAxis, $subLabel->value);
 
                 $this->lineDrawer->draw(
                     $job->image,
@@ -84,7 +84,7 @@ readonly class GridDrawer
         $xAxis = $chart->xAxis;
 
         foreach ($this->labelController->labels($xAxis) as $label) {
-            $x = $this->pixelator->valueToCoordinate($xAxis, $label->value);
+            $x = $this->mapper->valueToCoordinate($xAxis, $label->value);
 
             $this->lineDrawer->draw(
                 $job->image,
@@ -103,7 +103,7 @@ readonly class GridDrawer
         $yAxis = $chart->yAxis;
 
         foreach ($this->labelController->labels($yAxis) as $label) {
-            $y = $this->pixelator->valueToCoordinate($yAxis, $label->value);
+            $y = $this->mapper->valueToCoordinate($yAxis, $label->value);
 
             $this->lineDrawer->draw(
                 $job->image,

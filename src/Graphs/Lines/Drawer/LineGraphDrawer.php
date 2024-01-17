@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Graphs\Lines\Drawer;
 
-use Medas\Charts\Graphs\{Drawers\GraphDrawer, Graph, Lines\LineGraph};
+use Medas\Charts\Graphs\{Drawers\GraphDrawer, Graph, Lines\LineGraph, Markers\MarkerDrawer};
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
 

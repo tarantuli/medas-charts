@@ -6,9 +6,10 @@ namespace Medas\Charts\Graphs\Lines\Drawer;
 
 use Medas\Charts\Axes\{XAxis, Y2Axis, YAxis};
 use Medas\Charts\Chart;
+use Medas\Charts\Colors\ColorGenerator;
 use Medas\Charts\Data\{Data, IntervalCalculator};
-use Medas\Charts\Graphs\{Lines\LineGraph, YAxisType};
-use Medas\Charts\Image\{Drawers\LineDrawer as ImageLineDrawer, Pixelator};
+use Medas\Charts\Graphs\{Lines\LineGraph, Markers\MarkerDrawer, YAxisType};
+use Medas\Charts\Image\{Drawers\LineDrawer as ImageLineDrawer, Mapper};
 use Medas\Charts\Number;
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
@@ -17,10 +18,11 @@ use Medas\Core\Attributes\Service;
 readonly class LineDrawer
 {
     public function __construct(
+        private ColorGenerator     $colorGenerator,
         private ImageLineDrawer    $imageLineDrawer,
         private IntervalCalculator $intervalCalculator,
         private MarkerDrawer       $markerDrawer,
-        private Pixelator          $pixelator,
+        private Mapper             $mapper,
     )
     {
     }
@@ -48,7 +50,7 @@ readonly class LineDrawer
         $data = $chart->data[$graph->dataName];
         $image = $job->image;
         $drawSquaredLine = $graph->lineSettings->drawSquaredLine ?? $chart->lineSettings->drawSquaredLine;
-        $color = $graph->lineSettings->color ?? $chart->lineSettings->color;
+        $graph->color = $color = $graph->lineSettings->color ?? $graph->color ?? $this->colorGenerator->generate($job);
 
         // State variables
         $state = new LineDrawerState();
@@ -118,8 +120,8 @@ readonly class LineDrawer
             $newValues = [];
             $halfwidth = $subcurveWidth / 2;
 
-            $spread = $this->pixelator->valueToCoordinate($xAxis, $subcurveWidth)
-                - $this->pixelator->valueToCoordinate($xAxis, 0);
+            $spread = $this->mapper->valueToCoordinate($xAxis, $subcurveWidth)
+                - $this->mapper->valueToCoordinate($xAxis, 0);
 
             $maxHeight = 2 / $spread;
 
@@ -128,9 +130,9 @@ readonly class LineDrawer
                     continue;
                 }
 
-                $center = $this->pixelator->valueToCoordinate($xAxis, $key);
-                $from = $this->pixelator->valueToCoordinate($xAxis, $key - $halfwidth);
-                $to = $this->pixelator->valueToCoordinate($xAxis, $key + $halfwidth);
+                $center = $this->mapper->valueToCoordinate($xAxis, $key);
+                $from = $this->mapper->valueToCoordinate($xAxis, $key - $halfwidth);
+                $to = $this->mapper->valueToCoordinate($xAxis, $key + $halfwidth);
 
                 for ($x = ceil($from); $x <= floor($to); ++$x) {
                     $x = (int) $x;
@@ -146,14 +148,14 @@ readonly class LineDrawer
             foreach ($newValues as $x => $value) {
                 $values[] = [
                     $x,
-                    $this->pixelator->valueToCoordinate($yAxis, $value),
+                    $this->mapper->valueToCoordinate($yAxis, $value),
                 ];
             }
         }
         else {
             foreach ($data->values() as $key => $value) {
-                $x = $this->pixelator->valueToCoordinate($xAxis, $key);
-                $y = $this->pixelator->valueToCoordinate($yAxis, $value);
+                $x = $this->mapper->valueToCoordinate($xAxis, $key);
+                $y = $this->mapper->valueToCoordinate($yAxis, $value);
                 $values[] = [$x, $y];
             }
         }
@@ -170,7 +172,7 @@ readonly class LineDrawer
         }
 
         try {
-            return $this->pixelator->valueToCoordinate(
+            return $this->mapper->valueToCoordinate(
                 $chart->xAxis,
                 $gapLimit * $this->intervalCalculator->calculate($data)
             );

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes\Labels;
 
-use Medas\Charts\Image\{Drawers\FilledRectangleDrawer, Drawers\TextDrawer, Mapper};
+use Medas\Charts\Coordinates\Mapper;
+use Medas\Charts\Image\Drawers\{FilledRectangleDrawer, TextDrawer};
 use Medas\Charts\Number;
 use Medas\Charts\Rendering\Job;
 use Medas\Charts\Text\BoundingBoxFactory;

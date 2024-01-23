@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Image;
+namespace Medas\Charts\Coordinates;
 
 use Medas\Charts\Axes\Axis;
 use Medas\Core\Attributes\Service;

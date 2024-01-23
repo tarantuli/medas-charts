@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Graphs\Markers;
 
+use Medas\Charts\Coordinates\Mapper;
 use Medas\Charts\Data\SeriesManager;
 use Medas\Charts\Graphs\{Lines\LineGraph, YAxisType};
-use Medas\Charts\Image\Mapper;
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
 

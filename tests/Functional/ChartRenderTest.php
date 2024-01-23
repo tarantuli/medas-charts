@@ -42,6 +42,7 @@ class ChartRenderTest extends TestCase
         $squareMarkerGraph = service(LineGraphFactory::class)->create(YAxisType::Y, $dataName);
 
         $squareMarkerGraph->markerSettings->type = new Square();
+        $squareMarkerGraph->lineSettings->drawSquaredLine = true;
 
         service(GraphController::class)->add($chart, $squareMarkerGraph);
 
@@ -54,6 +55,7 @@ class ChartRenderTest extends TestCase
         $pentagonMarkerGraph = service(LineGraphFactory::class)->create(YAxisType::Y, $dataName);
 
         $pentagonMarkerGraph->markerSettings->type = new Pentagon();
+        $pentagonMarkerGraph->lineSettings->drawSmoothLine = true;
 
         service(GraphController::class)->add($chart, $pentagonMarkerGraph);
 

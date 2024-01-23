@@ -12,8 +12,9 @@ use Medas\Core\Attributes\Service;
 readonly class LineGraphDrawer implements GraphDrawer
 {
     public function __construct(
-        private LineDrawer   $lineDrawer,
-        private MarkerDrawer $markerDrawer,
+        private SmoothLineDrawer   $smoothLineDrawer,
+        private StraightLineDrawer $straightLineDrawer,
+        private MarkerDrawer       $markerDrawer,
     )
     {
     }
@@ -30,7 +31,12 @@ readonly class LineGraphDrawer implements GraphDrawer
         }
 
         if ($graph->showLine) {
-            $this->lineDrawer->draw($job, $graph);
+            if ($graph->lineSettings->drawSmoothLine ?? $job->chart->lineSettings->drawSmoothLine) {
+                $this->smoothLineDrawer->draw($job, $graph);
+            }
+            else {
+                $this->straightLineDrawer->draw($job, $graph);
+            }
         }
 
         if ($graph->showMarkers) {

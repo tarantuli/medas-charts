@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes;
 
-use Medas\Charts\Image\{Drawers\LineDrawer, Mapper};
+use Medas\Charts\Coordinates\Mapper;
+use Medas\Charts\Image\Drawers\LineDrawer;
 use Medas\Charts\Number;
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;

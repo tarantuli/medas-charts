@@ -12,16 +12,16 @@ use Medas\ImageManager\{Color, ColorManager};
 readonly class Generator
 {
     private const EXCEL2007_COLORS_LIST = [
-        '#4572A7',
-        '#AA4643',
-        '#89A54E',
-        '#71588F',
-        '#4198AF',
-        '#DB843D',
-        '#93A9CF',
-        '#D19392',
-        '#B9CD96',
-        '#A99BBD',
+        '#4572a7',
+        '#aa4643',
+        '#89a54e',
+        '#71588f',
+        '#4198af',
+        '#db843d',
+        '#93a9cf',
+        '#d19392',
+        '#b9cd96',
+        '#a99bbd',
     ];
     private const COLOR_COUNT = 10;
 

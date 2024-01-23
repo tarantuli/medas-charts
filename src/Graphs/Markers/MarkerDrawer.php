@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Graphs\Markers;
 
+use Medas\Charts\Data\SeriesManager;
 use Medas\Charts\Graphs\{Lines\LineGraph, YAxisType};
 use Medas\Charts\Image\Mapper;
 use Medas\Charts\Rendering\Job;
@@ -16,6 +17,7 @@ readonly class MarkerDrawer
     private array $typeDrawers;
 
     public function __construct(
+        private SeriesManager   $seriesManager,
         private Mapper          $mapper,
         Types\TypeDrawerManager $drawerManager,
     )
@@ -27,9 +29,9 @@ readonly class MarkerDrawer
     {
         $xAxis = $job->chart->xAxis;
         $yAxis = $graph->YAxisType === YAxisType::Y ? $job->chart->yAxis : $job->chart->y2Axis;
-        $data = $job->chart->data[$graph->dataName];
+        $values = $this->seriesManager->getValues($job->chart, $graph->seriesName);
 
-        foreach ($data->values() as $key => $value) {
+        foreach ($values as $key => $value) {
             $x = $this->mapper->valueToCoordinate($xAxis, $key);
             $y = $this->mapper->valueToCoordinate($yAxis, $value);
 

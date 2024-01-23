@@ -10,6 +10,7 @@ class Job
 {
     public Image $image;
     public int $generatedColorCounter = 0;
+    public array $seriesIntervals = [];
 
     public function __construct(
         public readonly Chart $chart,

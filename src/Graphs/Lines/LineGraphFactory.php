@@ -12,12 +12,12 @@ readonly class LineGraphFactory
 {
     public function create(
         YAxisType   $YAxisType,
-        string      $dataName,
+        string      $seriesName,
         string|null $xName = null,
         string|null $yName = null,
     ): LineGraph
     {
-        $graph = new LineGraph($YAxisType, $dataName, $xName, $yName);
+        $graph = new LineGraph($YAxisType, $seriesName, $xName, $yName);
 
         $graph->showLine = true;
         $graph->lineSettings = new LineSettings();

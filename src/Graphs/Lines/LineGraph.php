@@ -15,11 +15,11 @@ class LineGraph extends Graph
 
     public function __construct(
         YAxisType   $YAxisType,
-        string      $dataName,
+        string      $seriesName,
         string|null $xName = null,
         string|null $yName = null,
     )
     {
-        parent::__construct($YAxisType, $dataName, $xName, $yName);
+        parent::__construct($YAxisType, $seriesName, $xName, $yName);
     }
 }

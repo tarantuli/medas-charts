@@ -54,6 +54,9 @@ readonly class ChartFactory
         $chart->lineSettings = $this->lineSettingsFactory->create();
         $chart->markerSettings = $this->markerSettingsFactory->create();
 
+        // Graphs
+        $chart->seriesControllers = new \SplObjectStorage();
+
         return $chart;
     }
 }

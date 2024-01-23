@@ -4,21 +4,28 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Data;
 
+use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
 
 #[Service]
 readonly class IntervalCalculator
 {
-    public function calculate(Data $data): float
+    public function __construct(
+        private SeriesManager $seriesManager,
+    )
     {
-        if (isset($data->interval)) {
-            return $data->interval;
+    }
+
+    public function calculate(Job $job, string $seriesName): float
+    {
+        if (isset($job->seriesIntervals[$seriesName])) {
+            return $job->seriesIntervals[$seriesName];
         }
 
         $intervals = [];
         $previousX = null;
 
-        foreach ($data as $x => $y) {
+        foreach ($this->seriesManager->getValues($job->chart, $seriesName) as $x => $y) {
             if ($previousX !== null) {
                 $i = (string) ($x - $previousX);
 
@@ -54,6 +61,6 @@ readonly class IntervalCalculator
             }
         }
 
-        return $data->interval = $interval;
+        return $job->seriesIntervals[$seriesName] = $interval;
     }
 }

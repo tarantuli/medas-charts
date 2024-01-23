@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Medas\Charts\Graphs\Lines\Drawer;
 
 use Medas\Charts\Axes\{XAxis, Y2Axis, YAxis};
-use Medas\Charts\Chart;
 use Medas\Charts\Colors\ColorGenerator;
-use Medas\Charts\Data\{Data, IntervalCalculator};
+use Medas\Charts\Data\{IntervalCalculator, Sources\Series};
 use Medas\Charts\Graphs\{Lines\LineGraph, Markers\MarkerDrawer, YAxisType};
 use Medas\Charts\Image\{Drawers\LineDrawer as ImageLineDrawer, Mapper};
 use Medas\Charts\Number;
@@ -47,7 +46,7 @@ readonly class LineDrawer
         $chart = $job->chart;
         $xAxis = $chart->xAxis;
         $yAxis = $graph->YAxisType === YAxisType::Y ? $chart->yAxis : $chart->y2Axis;
-        $data = $chart->data[$graph->dataName];
+        $series = $chart->dataSeries[$graph->seriesName];
         $image = $job->image;
         $drawSquaredLine = $graph->lineSettings->drawSquaredLine ?? $chart->lineSettings->drawSquaredLine;
         $graph->color = $color = $graph->lineSettings->color ?? $graph->color ?? $this->colorGenerator->generate($job);
@@ -56,13 +55,14 @@ readonly class LineDrawer
         $state = new LineDrawerState();
 
         $values = $this->determineValues(
+            $job,
             $graph->lineSettings->subCurveWidth ?? $chart->lineSettings->subCurveWidth,
             $xAxis,
-            $data,
+            $series,
             $yAxis
         );
 
-        $gapLimit = $this->determineGapLimit($graph, $chart, $data);
+        $gapLimit = $this->determineGapLimit($job, $graph);
 
         foreach ($values as $set) {
             [$x, $y] = $set;
@@ -112,7 +112,13 @@ readonly class LineDrawer
         }
     }
 
-    private function determineValues(float $subcurveWidth, XAxis $xAxis, Data $data, Y2Axis|YAxis $yAxis): array
+    private function determineValues(
+        Job          $job,
+        float        $subcurveWidth,
+        XAxis        $xAxis,
+        Series       $series,
+        Y2Axis|YAxis $yAxis
+    ): array
     {
         $values = [];
 
@@ -125,11 +131,7 @@ readonly class LineDrawer
 
             $maxHeight = 2 / $spread;
 
-            foreach ($data->values() as $key => $value) {
-                if ($value === 0) {
-                    continue;
-                }
-
+            foreach ($job->chart->seriesControllers[$series]->getValues($series) as $key => $value) {
                 $center = $this->mapper->valueToCoordinate($xAxis, $key);
                 $from = $this->mapper->valueToCoordinate($xAxis, $key - $halfwidth);
                 $to = $this->mapper->valueToCoordinate($xAxis, $key + $halfwidth);
@@ -153,7 +155,7 @@ readonly class LineDrawer
             }
         }
         else {
-            foreach ($data->values() as $key => $value) {
+            foreach ($job->chart->seriesControllers[$series]->getValues($series) as $key => $value) {
                 $x = $this->mapper->valueToCoordinate($xAxis, $key);
                 $y = $this->mapper->valueToCoordinate($yAxis, $value);
                 $values[] = [$x, $y];
@@ -163,9 +165,9 @@ readonly class LineDrawer
         return $values;
     }
 
-    private function determineGapLimit(LineGraph $graph, Chart $chart, Data $data): float|null
+    private function determineGapLimit(Job $job, LineGraph $graph): float|null
     {
-        $gapLimit = $graph->lineSettings->gapLimit ?? $chart->lineSettings->gapLimit;
+        $gapLimit = $graph->lineSettings->gapLimit ?? $job->chart->lineSettings->gapLimit;
 
         if (is_nihil($gapLimit)) {
             return null;
@@ -173,8 +175,8 @@ readonly class LineDrawer
 
         try {
             return $this->mapper->valueToCoordinate(
-                $chart->xAxis,
-                $gapLimit * $this->intervalCalculator->calculate($data)
+                $job->chart->xAxis,
+                $gapLimit * $this->intervalCalculator->calculate($job, $graph->seriesName)
             );
         }
         catch (\Exception) {

@@ -33,8 +33,15 @@ class Chart
     public float $titleHeight;
 
     // Data
-    /** @var Data\Data[] */
-    public array $data = [];
+    /** @var Data\Sources\Series[] */
+    public array $dataSeries = [];
+
+    /**
+     * @var Data\Sources\SeriesController[]|\SplObjectStorage
+     * @noinspection PhpDocFieldTypeMismatchInspection
+     */
+    public \SplObjectStorage $seriesControllers;
+
     public Data\Range2D $range2D;
 
     // Graphs

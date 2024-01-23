@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Graphs;
 
-use Medas\Charts\{Axes\Axis, Axes\XAxis, Axes\Y2Axis, Axes\YAxis, Chart, Data\DataController};
+use Medas\Charts\{Axes\Axis, Axes\XAxis, Axes\Y2Axis, Axes\YAxis, Chart, Data\SeriesManager};
 use Medas\Core\Attributes\Service;
 
 #[Service]
 readonly class GraphController
 {
     public function __construct(
-        private DataController $dataController,
+        private SeriesManager $seriesManager,
     )
     {
     }
@@ -67,6 +67,6 @@ readonly class GraphController
             return;
         }
 
-        $graph->range2D = $this->dataController->determineRange2D($chart, $graph->dataName);
+        $graph->range2D = $this->seriesManager->getRange2D($chart, $graph->seriesName);
     }
 }

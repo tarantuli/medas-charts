@@ -14,7 +14,7 @@ abstract class Graph
 
     public function __construct(
         public YAxisType   $YAxisType,
-        public string      $dataName,
+        public string      $seriesName,
         public string|null $xName = null,
         public string|null $yName = null,
     )

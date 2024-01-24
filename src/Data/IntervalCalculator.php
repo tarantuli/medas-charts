@@ -25,7 +25,7 @@ readonly class IntervalCalculator
         $intervals = [];
         $previousX = null;
 
-        foreach ($this->seriesManager->getValues($job->chart, $seriesName) as $x => $y) {
+        foreach ($this->seriesManager->getData($job->chart, $seriesName) as $x => $y) {
             if ($previousX !== null) {
                 $i = (string) ($x - $previousX);
 

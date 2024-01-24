@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Data\Sources;
 
-abstract class BasicSeries implements Series
+abstract class BaseSeries implements Series
 {
     public function __construct(
         public string|null $name = null,

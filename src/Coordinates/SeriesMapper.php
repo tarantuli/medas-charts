@@ -38,9 +38,9 @@ readonly class SeriesMapper
     {
         $values = [];
 
-        foreach ($job->chart->seriesControllers[$series]->getValues($series) as $key => $value) {
-            $x = $this->mapper->valueToCoordinate($xAxis, $key);
-            $y = $this->mapper->valueToCoordinate($yAxis, $value);
+        foreach ($job->chart->seriesControllers[$series]->getData($series) as $datum) {
+            $x = $this->mapper->valueToCoordinate($xAxis, $datum->key);
+            $y = $this->mapper->valueToCoordinate($yAxis, $datum->value);
             $values[] = [$x, $y];
         }
 
@@ -64,7 +64,7 @@ readonly class SeriesMapper
 
         $maxHeight = 2 / $spread;
 
-        foreach ($job->chart->seriesControllers[$series]->getValues($series) as $key => $value) {
+        foreach ($job->chart->seriesControllers[$series]->getData($series) as $key => $value) {
             $center = $this->mapper->valueToCoordinate($xAxis, $key);
             $from = $this->mapper->valueToCoordinate($xAxis, $key - $halfwidth);
             $to = $this->mapper->valueToCoordinate($xAxis, $key + $halfwidth);

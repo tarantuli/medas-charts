@@ -4,12 +4,24 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Data\Sources\KeyToValueArray;
 
-use Medas\Charts\Data\{Range2D, Sources\Series, Sources\SeriesController};
+use Medas\Charts\Data\{
+    Datum,
+    Range2D,
+    Sources\MinMaxFinder,
+    Sources\Series,
+    Sources\SeriesController
+};
 use Medas\Core\Attributes\Service;
 
 #[Service]
 readonly class KeyToValueArrayController implements SeriesController
 {
+    public function __construct(
+        private MinMaxFinder $minMaxFinder,
+    )
+    {
+    }
+
     public function canHandle(Series $series): bool
     {
         return $series instanceof KeyToValueArray;
@@ -18,29 +30,25 @@ readonly class KeyToValueArrayController implements SeriesController
     /** @var KeyToValueArray $series */
     public function getRange2D(Series $series): Range2D
     {
-        return new Range2D(
-            min(array_keys($series->data())),
-            max(array_keys($series->data())),
-            min($series->data()),
-            max($series->data()),
-        );
+        $data = $this->getData($series);
+        [$min, $max] = $this->minMaxFinder->find($data);
+
+        return new Range2D($data[0]->key, $data[count($data) - 1]->key, $min, $max);
     }
 
     /** @var KeyToValueArray $series */
-    public function getKeys(Series $series): iterable
+    public function getData(Series $series): array
     {
-        $xs = [];
-
-        foreach ($series->values() as $x => $y) {
-            $xs[] = $x;
+        if (isset($series->data)) {
+            return $series->data;
         }
 
-        return $xs;
-    }
+        $series->data = [];
 
-    /** @var KeyToValueArray $series */
-    public function getValues(Series $series): iterable
-    {
-        return $series->values();
+        foreach ($series->pairs as $key => $value) {
+            $series->data[] = new Datum($key, $value);
+        }
+
+        return $series->data;
     }
 }

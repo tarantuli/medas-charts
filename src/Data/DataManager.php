@@ -52,9 +52,24 @@ readonly class DataManager
         $xs = [];
 
         foreach ($chart->dataSeries as $series) {
-            $xs = array_merge($xs, $chart->seriesControllers[$series]->getKeys($series));
+            $xs = array_merge(
+                $xs,
+                $this->returnKeys($chart->seriesControllers[$series]->getData($series))
+            );
         }
 
-        return $xs;
+        return array_unique($xs);
+    }
+
+    /** @var Datum[] $data */
+    private function returnKeys(array $data): array
+    {
+        $keys = [];
+
+        foreach ($data as $datum) {
+            $keys[] = $datum->key;
+        }
+
+        return $keys;
     }
 }

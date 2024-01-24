@@ -29,11 +29,11 @@ readonly class MarkerDrawer
     {
         $xAxis = $job->chart->xAxis;
         $yAxis = $graph->YAxisType === YAxisType::Y ? $job->chart->yAxis : $job->chart->y2Axis;
-        $values = $this->seriesManager->getValues($job->chart, $graph->seriesName);
+        $data = $this->seriesManager->getData($job->chart, $graph->seriesName);
 
-        foreach ($values as $key => $value) {
-            $x = $this->mapper->valueToCoordinate($xAxis, $key);
-            $y = $this->mapper->valueToCoordinate($yAxis, $value);
+        foreach ($data as $datum) {
+            $x = $this->mapper->valueToCoordinate($xAxis, $datum->key);
+            $y = $this->mapper->valueToCoordinate($yAxis, $datum->value);
 
             $this->drawMarker($job, $graph, $x, $y);
         }

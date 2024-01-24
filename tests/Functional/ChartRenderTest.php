@@ -6,6 +6,7 @@ namespace Medas\ChartsTest\Functional;
 
 use Medas\Charts\ChartFactory;
 use Medas\Charts\Data\DataManager;
+use Medas\Charts\Data\Sources\Formulas\Formula;
 use Medas\Charts\Data\Sources\KeyToValueArray\KeyToValueArray;
 use Medas\Charts\Graphs\GraphController;
 use Medas\Charts\Graphs\Lines\LineGraphFactory;
@@ -22,6 +23,8 @@ class ChartRenderTest extends TestCase
     {
         $chart = service(ChartFactory::class)->create();
         $dataManager = service(DataManager::class);
+        $graphController = service(GraphController::class);
+        $lineGraphFactory = service(LineGraphFactory::class);
 
         // Circle markers
         $dataName = $dataManager->addSeries(
@@ -29,9 +32,9 @@ class ChartRenderTest extends TestCase
             new KeyToValueArray([0 => 0, 1 => .1, 3 => 1.2, 4 => 1.2, 5 => 2.8])
         );
 
-        $squareMarkerGraph = service(LineGraphFactory::class)->create(YAxisType::Y, $dataName);
+        $squareMarkerGraph = $lineGraphFactory->create(YAxisType::Y, $dataName);
 
-        service(GraphController::class)->add($chart, $squareMarkerGraph);
+        $graphController->add($chart, $squareMarkerGraph);
 
         // Square markers
         $dataName = $dataManager->addSeries(
@@ -39,12 +42,12 @@ class ChartRenderTest extends TestCase
             new KeyToValueArray([0 => 0, 1 => 1.1, 3 => 1.2, 4 => 0.2, 5 => .8])
         );
 
-        $squareMarkerGraph = service(LineGraphFactory::class)->create(YAxisType::Y, $dataName);
+        $squareMarkerGraph = $lineGraphFactory->create(YAxisType::Y, $dataName);
 
         $squareMarkerGraph->markerSettings->type = new Square();
         $squareMarkerGraph->lineSettings->drawSquaredLine = true;
 
-        service(GraphController::class)->add($chart, $squareMarkerGraph);
+        $graphController->add($chart, $squareMarkerGraph);
 
         // Pentagons markers
         $dataName = $dataManager->addSeries(
@@ -52,14 +55,22 @@ class ChartRenderTest extends TestCase
             new KeyToValueArray([0 => 0, 1 => 2.1, 3 => 1.2, 4 => 2.2, 5 => 1.8])
         );
 
-        $pentagonMarkerGraph = service(LineGraphFactory::class)->create(YAxisType::Y, $dataName);
+        $pentagonMarkerGraph = $lineGraphFactory->create(YAxisType::Y, $dataName);
 
         $pentagonMarkerGraph->markerSettings->type = new Pentagon();
         $pentagonMarkerGraph->lineSettings->drawSmoothLine = true;
 
-        service(GraphController::class)->add($chart, $pentagonMarkerGraph);
+        $graphController->add($chart, $pentagonMarkerGraph);
 
         $chart->imageSettings->backgroundColor = service(ColorManager::class)->fromHtmlString('#fff');
+
+        // Formula
+        $formula = $dataManager->addSeries($chart, new Formula($chart, fn($x) => sin($x) + 1.9, 0.2, 4.5));
+        $graph = $lineGraphFactory->create(YAxisType::Y, $formula);
+        $graph->showMarkers = false;
+        $graphController->add($chart, $graph);
+
+        // Render
         $image = service(Renderer::class)->render($chart);
 
         self::assertInstanceOf(Image::class, $image);

@@ -19,24 +19,24 @@ readonly class ArrayOfArraysController implements SeriesController
     public function getRange2D(Series $series): Range2D
     {
         $keys = $this->getKeys($series);
-        $values = $this->getValues($series);
+        $data = $this->getData($series);
 
         return new Range2D(
             min($keys),
-            max($values),
-            min($values),
-            max($values),
+            max($keys),
+            min($data),
+            max($data),
         );
     }
 
     /** @var ArrayOfArrays $series */
     public function getKeys(Series $series): iterable
     {
-        return array_keys($this->getValues($series));
+        return array_keys($this->getData($series));
     }
 
     /** @var ArrayOfArrays $series */
-    public function getValues(Series $series): array
+    public function getData(Series $series): array
     {
         return $series->data;
     }

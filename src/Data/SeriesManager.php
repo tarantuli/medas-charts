@@ -33,8 +33,8 @@ readonly class SeriesManager
         return $chart->seriesControllers[$series]->getKeys($series);
     }
 
-    /** @return float[] */
-    public function getValues(Chart $chart, string $name): iterable
+    /** @return Datum[] */
+    public function getData(Chart $chart, string $name): iterable
     {
         if (!array_key_exists($name, $chart->dataSeries)) {
             throw new Exceptions\SeriesNotFoundByName($name);
@@ -42,6 +42,6 @@ readonly class SeriesManager
 
         $series = $chart->dataSeries[$name];
 
-        return $chart->seriesControllers[$series]->getValues($series);
+        return $chart->seriesControllers[$series]->getData($series);
     }
 }

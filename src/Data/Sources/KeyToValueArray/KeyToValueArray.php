@@ -4,26 +4,22 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Data\Sources\KeyToValueArray;
 
-use Medas\Charts\Data\Sources\Series;
-use Medas\Core\Collections\BasicCollection;
+use Medas\Charts\Data\{Datum, Sources\Series};
 
-class KeyToValueArray extends BasicCollection implements Series
+class KeyToValueArray implements Series
 {
+    /** @var Datum[] */
+    public array $data;
+
     public function __construct(
-        array              $data,
+        public array       $pairs,
         public string|null $name = null,
     )
     {
-        parent::__construct($data);
     }
 
     public function name(): string|null
     {
         return $this->name;
-    }
-
-    public function data(): array
-    {
-        return $this->data;
     }
 }

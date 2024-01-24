@@ -6,8 +6,7 @@ namespace Medas\ChartsTest\Functional;
 
 use Medas\Charts\ChartFactory;
 use Medas\Charts\Data\DataManager;
-use Medas\Charts\Data\Sources\Formulas\Formula;
-use Medas\Charts\Data\Sources\KeyToValueArray\KeyToValueArray;
+use Medas\Charts\Data\Sources\{Formulas\Formula, KeyToValueArray\KeyToValueArray};
 use Medas\Charts\Graphs\GraphController;
 use Medas\Charts\Graphs\Lines\LineGraphFactory;
 use Medas\Charts\Graphs\Markers\Types\{Polygons\Pentagon, Squares\Square};
@@ -65,9 +64,15 @@ class ChartRenderTest extends TestCase
         $chart->imageSettings->backgroundColor = service(ColorManager::class)->fromHtmlString('#fff');
 
         // Formula
-        $formula = $dataManager->addSeries($chart, new Formula($chart, fn($x) => sin($x) + 1.9, 0.2, 4.5));
+        $formula = $dataManager->addSeries(
+            $chart,
+            new Formula($chart, fn($x) => sin($x) + 1.9, 0.2, 4.5)
+        );
+
         $graph = $lineGraphFactory->create(YAxisType::Y, $formula);
+
         $graph->showMarkers = false;
+
         $graphController->add($chart, $graph);
 
         // Render

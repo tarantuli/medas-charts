@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes;
 
+use Medas\Charts\Alignment\Alignment;
+use Medas\Charts\Alignment\Horizontal;
 use Medas\Charts\General\TextSettings;
 use Medas\Core\Attributes\Service;
 use Medas\ImageManager\ColorManager;
@@ -29,7 +31,7 @@ readonly class AxisFactory
         $settings->showTitle = true;
 
         $settings->titleSettings = new TextSettings(
-            font: 'trebuc',
+            font: 'rubik-regular',
             size: 10,
             margin: 5,
             color: $this->colorManager->fromHtmlString('#000'),
@@ -47,9 +49,10 @@ readonly class AxisFactory
 
         $axis->settings = $this->createSettings();
         $axis->settings->desiredIntervalCount = 8;
+        $axis->settings->titleSettings->alignment = new Alignment(Horizontal::Center);
 
         $axis->settings->labelSettings = new TextSettings(
-            font: 'calibri',
+            font: 'rubik-regular',
             size: 8,
             color: $this->colorManager->fromHtmlString('#000'),
             angle: 90,
@@ -77,11 +80,12 @@ readonly class AxisFactory
         $axis->settings->desiredIntervalCount = 6;
 
         $axis->settings->labelSettings = new TextSettings(
-            font: 'calibri',
+            font: 'rubik-regular',
             size: 8,
             color: $this->colorManager->fromHtmlString('#000')
         );
 
+        $axis->settings->titleSettings->angle = 90;
         $axis->iterationType = IntervalTypes\IterationType::Linear;
         $axis->hasZeroRange = false;
 

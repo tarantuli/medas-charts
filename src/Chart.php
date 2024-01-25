@@ -14,7 +14,7 @@ class Chart
 
     // Settings
     public Image\ImageSettings $imageSettings;
-    public Settings\ChartSettings $chartSettings;
+    public Chart\ChartSettings $chartSettings;
     public Settings\FontSettings $fontSettings;
     public Settings\ColorSettings $colorSettings;
     public Legend\LegendSettings $legendSettings;

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Settings;
+namespace Medas\Charts\Chart;
 
+use Medas\Charts\Alignment\{Alignment, Horizontal, Vertical};
 use Medas\Charts\Colors\Excel2007\Excel2007;
 use Medas\Charts\General\TextSettings;
 use Medas\Core\Attributes\Service;
@@ -28,10 +29,11 @@ readonly class ChartSettingsFactory
         $settings->title = null;
 
         $settings->titleSettings = new TextSettings(
-            font: 'trebucbd',
-            size: 10,
+            font: 'rubik-regular',
+            size: 12,
             margin: 15,
-            color: $this->manager->fromHtmlString('#000')
+            color: $this->manager->fromHtmlString('#000'),
+            alignment: new Alignment(Horizontal::Center, Vertical::Middle)
         );
 
         $settings->allowedDataGridOverflow = 5.0;

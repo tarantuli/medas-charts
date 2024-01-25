@@ -22,6 +22,7 @@ readonly class Renderer
         private ImageFactory         $imageFactory,
         private LabelDrawer          $labelDrawer,
         private Resizer              $resizer,
+        private Chart\TitleDrawer    $titleDrawer,
     )
     {
     }
@@ -63,5 +64,6 @@ readonly class Renderer
     private function drawTextualElements(Job $job): void
     {
         $this->labelDrawer->draw($job);
+        $this->titleDrawer->draw($job);
     }
 }

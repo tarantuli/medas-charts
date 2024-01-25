@@ -27,7 +27,7 @@ readonly class LegendSettingsFactory
         $settings->lineSpacing = 5;
 
         $settings->labelSettings = new TextSettings(
-            font: 'arial',
+            font: 'rubik-regular',
             size: 9,
             margin: 0,
             color: $this->colorManager->fromHtmlString('#000'),
@@ -36,7 +36,7 @@ readonly class LegendSettingsFactory
         $settings->marker = '&#9632;';
 
         $settings->markerSettings = new TextSettings(
-            font: 'arial',
+            font: 'rubik-regular',
             size: 8,
             margin: 3,
         );

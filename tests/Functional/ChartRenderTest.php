@@ -24,6 +24,7 @@ class ChartRenderTest extends TestCase
         $dataManager = service(DataManager::class);
         $graphController = service(GraphController::class);
         $lineGraphFactory = service(LineGraphFactory::class);
+        $chart->imageSettings->backgroundColor = service(ColorManager::class)->fromHtmlString('#fff');
 
         // Circle markers
         $dataName = $dataManager->addSeries(
@@ -61,7 +62,6 @@ class ChartRenderTest extends TestCase
 
         $graphController->add($chart, $pentagonMarkerGraph);
 
-        $chart->imageSettings->backgroundColor = service(ColorManager::class)->fromHtmlString('#fff');
 
         // Formula
         $formula = $dataManager->addSeries(

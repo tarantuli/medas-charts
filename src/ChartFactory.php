@@ -20,7 +20,7 @@ readonly class ChartFactory
         private Grid\GridFactory                          $gridFactory,
         private Image\ImageSettingsFactory                $imageSettingsFactory,
         private Legend\LegendSettingsFactory              $legendSettingsFactory,
-        private Settings\ChartSettingsFactory             $chartSettingsFactory,
+        private Chart\ChartSettingsFactory                $chartSettingsFactory,
         private Settings\ColorSettingsFactory             $colorSettingsFactory,
         private Settings\FontSettingsFactory              $fontSettingsFactory,
     )

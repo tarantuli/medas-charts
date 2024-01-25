@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\Charts\Settings;
+namespace Medas\Charts\Chart;
 
 use Medas\Charts\{Colors\ColorScheme, General\TextSettings};
 use Medas\ImageManager\Color;

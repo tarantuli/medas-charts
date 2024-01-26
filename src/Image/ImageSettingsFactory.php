@@ -21,8 +21,8 @@ readonly class ImageSettingsFactory
     {
         $settings = new ImageSettings();
 
-        $settings->height = 480;
-        $settings->width = 820;
+        $settings->height = 576;
+        $settings->width = 1024;
         $settings->scalingFactor = 4;
         $settings->backgroundColor = $this->colorManager->fromHtmlString('#0fff');
         $settings->padding = new FourSides(15);

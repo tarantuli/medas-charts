@@ -9,6 +9,7 @@ use Medas\Charts\Chart;
 use Medas\Charts\Graphs\Drawers\GraphsDrawer;
 use Medas\Charts\Grid\GridDrawer;
 use Medas\Charts\Image\{Image, ImageFactory, Size\Resizer};
+use Medas\Charts\Legend\LegendDrawer;
 use Medas\Core\Attributes\Service;
 
 #[Service]
@@ -21,6 +22,7 @@ readonly class Renderer
         private GridDrawer           $gridDrawer,
         private ImageFactory         $imageFactory,
         private LabelDrawer          $labelDrawer,
+        private LegendDrawer         $legendDrawer,
         private Resizer              $resizer,
         private Chart\TitleDrawer    $titleDrawer,
     )
@@ -52,6 +54,7 @@ readonly class Renderer
         $this->gridDrawer->draw($job);
         $this->axeDrawer->draw($job);
         $this->graphsDrawer->draw($job);
+        $this->legendDrawer->drawBox($job);
     }
 
     private function undoScalingFactor(Job $job): void
@@ -65,5 +68,6 @@ readonly class Renderer
     {
         $this->labelDrawer->draw($job);
         $this->titleDrawer->draw($job);
+        $this->legendDrawer->drawLabels($job);
     }
 }

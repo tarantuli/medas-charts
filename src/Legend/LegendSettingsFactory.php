@@ -27,18 +27,18 @@ readonly class LegendSettingsFactory
         $settings->lineSpacing = 5;
 
         $settings->labelSettings = new TextSettings(
-            font: 'rubik-regular',
-            size: 9,
+            font: 'Rubik-Regular',
+            size: 10,
             margin: 0,
             color: $this->colorManager->fromHtmlString('#000'),
         );
 
-        $settings->marker = '&#9632;';
+        $settings->marker = '&#x25ac;';
 
         $settings->markerSettings = new TextSettings(
-            font: 'rubik-regular',
-            size: 8,
-            margin: 3,
+            font: 'Arimo-Regular',
+            size: 9,
+            margin: 6,
         );
 
         $settings->location = Location::TopLeft;

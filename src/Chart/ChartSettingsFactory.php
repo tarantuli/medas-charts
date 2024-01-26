@@ -29,9 +29,9 @@ readonly class ChartSettingsFactory
         $settings->title = null;
 
         $settings->titleSettings = new TextSettings(
-            font: 'rubik-regular',
-            size: 12,
-            margin: 15,
+            font: 'Rubik-Regular',
+            size: 14,
+            margin: 20,
             color: $this->manager->fromHtmlString('#000'),
             alignment: new Alignment(Horizontal::Center, Vertical::Middle)
         );

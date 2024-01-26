@@ -16,7 +16,7 @@ readonly class Resizer
 
         imageantialias($resource, true);
 
-        imagealphablending($resource, false);
+        imagealphablending($resource, true);
 
         imagesavealpha($resource, true);
 

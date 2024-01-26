@@ -25,7 +25,7 @@ readonly class FilledRectangleDrawer
             (int) round($y1 * $image->scalingFactor),
             (int) round($x2 * $image->scalingFactor),
             (int) round($y2 * $image->scalingFactor),
-            $this->colorManager->resolve($image, $color)
+            $this->colorManager->resolve($image, $color),
         );
     }
 }

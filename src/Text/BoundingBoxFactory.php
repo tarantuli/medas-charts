@@ -18,12 +18,14 @@ readonly class BoundingBoxFactory
 
     public function create(string $text, TextSettings $settings): BoundingBox
     {
-        $bbox = imageftbbox(
-            $settings->size,
-            0,
-            $this->fontResolver->resolve($settings->font),
-            $text
-        );
+        $font = $this->fontResolver->resolve($settings->font);
+
+        try {
+            $bbox = imageftbbox($settings->size, 0, $font, $text);
+        }
+        catch (\ErrorException $exception) {
+            throw new \Exception('ErrorException ' . $exception->getMessage() . ' when bboxing ' . $font);
+        }
 
         return new BoundingBox(
             $bbox[Coordinate::LowerLeftX->value],

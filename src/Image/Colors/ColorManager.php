@@ -22,8 +22,12 @@ readonly class ColorManager
             return $image->colors[$hexString];
         }
 
-        return $image->colors[$hexString] = imagecolorallocatealpha($image->resource, (int) round(255 * $color->red), (int) round(255 * $color->green), (int) round(255 * $color->blue), (int) round(
-            127 - 127 * $color->opacity,
-        ));
+        return $image->colors[$hexString] = imagecolorallocatealpha(
+            $image->resource,
+            (int) round(255 * $color->red),
+            (int) round(255 * $color->green),
+            (int) round(255 * $color->blue),
+            (int) round(127 - 127 * $color->opacity),
+        );
     }
 }

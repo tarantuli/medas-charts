@@ -31,9 +31,9 @@ readonly class DimensionsCalculator
     {
         $maxLength = 0;
 
-        foreach ($chart->dataSeries as $series) {
+        foreach ($chart->dataSeries as $name => $series) {
             $length = $this->boundingBoxFactory->create(
-                $series->name(),
+                $name,
                 $chart->legendSettings->labelSettings
             )->width;
 
@@ -41,5 +41,18 @@ readonly class DimensionsCalculator
         }
 
         return $maxLength;
+    }
+
+    public function height(Chart $chart): float
+    {
+        $graphCount = count($chart->graphs);
+
+        return $chart->legendSettings->padding->top
+            + $graphCount * max(
+                $chart->legendSettings->labelSettings->size,
+                $chart->legendSettings->markerSettings->size
+            )
+            + ($graphCount - 1) * $chart->legendSettings->lineSpacing
+            + $chart->legendSettings->padding->bottom;
     }
 }

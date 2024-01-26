@@ -21,18 +21,18 @@ readonly class ImageFactory
         $scalingFactor = $chart->imageSettings->scalingFactor;
 
         $resource = imagecreatetruecolor(
-            $chart->imageSettings->width * $scalingFactor,
-            $chart->imageSettings->height * $scalingFactor,
+            (int) round($chart->imageSettings->width * $scalingFactor),
+            (int) round($chart->imageSettings->height * $scalingFactor),
         );
 
         if (Number::areEqual($scalingFactor, 1)) {
             imageantialias($resource, true);
         }
         else {
-            imagesetthickness($resource, $scalingFactor);
+            imagesetthickness($resource, (int) round($scalingFactor));
         }
 
-        imagealphablending($resource, false);
+        imagealphablending($resource, true);
 
         imagesavealpha($resource, true);
 

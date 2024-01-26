@@ -37,10 +37,6 @@ readonly class FontDirectory implements ConfigOption
 
     public function default(): string
     {
-        if (str_starts_with(PHP_OS, 'WIN')) {
-            return 'C:\\Windows\\Fonts';
-        }
-
-        return '/usr/share/fonts';
+        return 'fonts';
     }
 }

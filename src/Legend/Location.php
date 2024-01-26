@@ -10,8 +10,6 @@ enum Location
     case TopRight;
     case BottomLeft;
     case BottomRight;
-    case TopMargin;
-    case BottomMargin;
     case LeftMargin;
     case RightMargin;
 }

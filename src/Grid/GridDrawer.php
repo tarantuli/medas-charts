@@ -66,6 +66,10 @@ readonly class GridDrawer
             foreach ($this->subLabelController->labels($yAxis, $label->value - $yAxis->minValue) as $subLabel) {
                 $y = $this->mapper->valueToCoordinate($yAxis, $subLabel->value);
 
+                if (Number::isLessThanOrEqual($y, $chart->grid->ym)) {
+                    break;
+                }
+
                 $this->lineDrawer->draw(
                     $job->image,
                     $chart->grid->xo,

@@ -29,7 +29,6 @@ class TextTest extends TestCase
         $chart->yAxis->settings->title = 'y-axis';
         $chart->y2Axis->settings->title = 'y2-axis';
 
-
         // Formula
         $formula = $dataManager->addSeries(
             $chart,

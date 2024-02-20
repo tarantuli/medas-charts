@@ -10,13 +10,14 @@ use Medas\Charts\Graphs\Drawers\GraphsDrawer;
 use Medas\Charts\Grid\GridDrawer;
 use Medas\Charts\Image\{Image, ImageFactory, Size\Resizer};
 use Medas\Charts\Legend\LegendDrawer;
-use Medas\Core\Attributes\Service;
+use Medas\Core\Attributes\{Entrypoint, Service};
 
-#[Service]
+#[Service, Entrypoint]
 readonly class Renderer
 {
     public function __construct(
         private AxeDrawer            $axeDrawer,
+        private Chart\TitleDrawer    $titleDrawer,
         private DimensionsCalculator $dimensionsCalculator,
         private GraphsDrawer         $graphsDrawer,
         private GridDrawer           $gridDrawer,
@@ -24,7 +25,6 @@ readonly class Renderer
         private LabelDrawer          $labelDrawer,
         private LegendDrawer         $legendDrawer,
         private Resizer              $resizer,
-        private Chart\TitleDrawer    $titleDrawer,
     )
     {
     }

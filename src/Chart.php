@@ -37,7 +37,7 @@ class Chart
     public array $dataSeries = [];
 
     /**
-     * @var Data\Sources\SeriesController[]|\SplObjectStorage
+     * @var Data\Sources\SeriesController[]
      * @noinspection PhpDocFieldTypeMismatchInspection
      */
     public \SplObjectStorage $seriesControllers;

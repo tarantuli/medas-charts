@@ -13,7 +13,7 @@ readonly class MinMaxFinder
     /**
      * @param Datum[] $data
      *
-     * @return array(min, max)
+     * @return array(min,max)
      */
     public function find(array $data): array
     {

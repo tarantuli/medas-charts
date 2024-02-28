@@ -10,7 +10,7 @@ use Medas\Core\{Attributes\Service, Interfaces\ConfigGroup, Interfaces\ConfigOpt
 readonly class FontDirectory implements ConfigOption
 {
     public function __construct(
-        private RootGroup $group,
+        private ChartsConfigOptionsGroup $group,
     )
     {
     }

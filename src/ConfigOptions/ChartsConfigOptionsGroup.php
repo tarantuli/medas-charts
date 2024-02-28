@@ -7,7 +7,7 @@ namespace Medas\Charts\ConfigOptions;
 use Medas\Core\{Attributes\Service, Interfaces\ConfigGroup};
 
 #[Service]
-readonly class RootGroup implements ConfigGroup
+readonly class ChartsConfigOptionsGroup implements ConfigGroup
 {
     public function parent(): ConfigGroup|null
     {

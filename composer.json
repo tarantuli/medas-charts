@@ -1,6 +1,9 @@
 {
     "name": "morphp/medas-charts",
-    "description": "Medas charts",
+    "description": "Contains methods to generate charts",
+    "keywords": [
+        "media"
+    ],
     "authors": [
         {
             "name": "Patrick Morpey",

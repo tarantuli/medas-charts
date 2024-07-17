@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Legend;
 
-use Medas\Charts\Image\Drawers\{FilledRectangleDrawer, TextDrawer};
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
+use Medas\ImageDrawer\Drawers\{FilledRectangleDrawer, TextDrawer};
 
 #[Service]
 readonly class LegendDrawer

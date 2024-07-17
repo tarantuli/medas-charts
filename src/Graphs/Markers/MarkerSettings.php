@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Graphs\Markers;
 
-use Medas\ImageManager\Color;
+use Medas\ImageDrawer\Colors\Color;
 
 class MarkerSettings
 {

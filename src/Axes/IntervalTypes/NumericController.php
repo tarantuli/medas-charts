@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes\IntervalTypes;
 
-use Medas\Charts\{Axes\Axis, Number};
-use Medas\Core\Attributes\Service;
+use Medas\Charts\Axes\Axis;
+use Medas\Core\{Attributes\Service, FloatingNumber};
 
 #[Service]
 readonly class NumericController
@@ -19,10 +19,10 @@ readonly class NumericController
             return;
         }
 
-        $axis->minValue = (floor($axis->minValue / $axis->interval + Number::SMALL_POSITIVE) - $axis->barOffset)
+        $axis->minValue = (floor($axis->minValue / $axis->interval + FloatingNumber::SMALL_POSITIVE) - $axis->barOffset)
             * $axis->interval;
 
-        $axis->maxValue = (floor($axis->maxValue / $axis->interval - Number::SMALL_POSITIVE) + $axis->barOffset + 1)
+        $axis->maxValue = (floor($axis->maxValue / $axis->interval - FloatingNumber::SMALL_POSITIVE) + $axis->barOffset + 1)
             * $axis->interval;
 
         /*
@@ -42,7 +42,7 @@ readonly class NumericController
     {
         $range = $axis->maxValue - $axis->minValue;
 
-        if (Number::isZeroOrLess($range)) {
+        if (FloatingNumber::isZeroOrLess($range)) {
             $axis->subgridCount = 1;
 
             return 1;
@@ -53,7 +53,7 @@ readonly class NumericController
         $base = null;
 
         foreach ($axis->settings->normalizationBases as $base) {
-            if (Number::isLessThanOrEqual($range, $axis->settings->desiredIntervalCount * $base * $factor)) {
+            if (FloatingNumber::isLessThanOrEqual($range, $axis->settings->desiredIntervalCount * $base * $factor)) {
                 break;
             }
         }

@@ -7,9 +7,9 @@ namespace Medas\Charts\Graphs\Lines\Drawer;
 use Medas\Charts\Colors\ColorGenerator;
 use Medas\Charts\Coordinates\SeriesMapper;
 use Medas\Charts\Graphs\{Lines\LineGraph, Markers\MarkerDrawer, YAxisType};
-use Medas\Charts\Image\Drawers\LineDrawer as ImageLineDrawer;
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
+use Medas\ImageDrawer\Drawers\LineDrawer as ImageLineDrawer;
 
 #[Service]
 readonly class StraightLineDrawer

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Medas\Charts;
 
 use Medas\Core\Attributes\Service;
+use Medas\ImageDrawer\ImageSettingsFactory;
 
 #[Service]
 readonly class ChartFactory
@@ -18,7 +19,7 @@ readonly class ChartFactory
         private Graphs\Lines\LineSettingsFactory          $lineSettingsFactory,
         private Graphs\Markers\MarkerSettingsFactory      $markerSettingsFactory,
         private Grid\GridFactory                          $gridFactory,
-        private Image\ImageSettingsFactory                $imageSettingsFactory,
+        private ImageSettingsFactory                      $imageSettingsFactory,
         private Legend\LegendSettingsFactory              $legendSettingsFactory,
         private Chart\ChartSettingsFactory                $chartSettingsFactory,
         private Settings\ColorSettingsFactory             $colorSettingsFactory,
@@ -43,6 +44,7 @@ readonly class ChartFactory
         $chart->fontSettings = $this->fontSettingsFactory->create();
         $chart->colorSettings = $this->colorSettingsFactory->create();
         $chart->legendSettings = $this->legendSettingsFactory->create();
+        $chart->sizeLock = Image\SizeLock::ImageSize;
 
         // Data settings
         $chart->dataSettings = $this->dataSettingsFactory->create();

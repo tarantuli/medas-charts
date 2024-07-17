@@ -6,10 +6,9 @@ namespace Medas\Charts\Grid;
 
 use Medas\Charts\Axes\Labels\{LabelController, SubLabelController};
 use Medas\Charts\Coordinates\Mapper;
-use Medas\Charts\Image\Drawers\LineDrawer;
-use Medas\Charts\Number;
 use Medas\Charts\Rendering\Job;
-use Medas\Core\Attributes\Service;
+use Medas\Core\{Attributes\Service, FloatingNumber};
+use Medas\ImageDrawer\Drawers\LineDrawer;
 
 #[Service]
 readonly class GridDrawer
@@ -40,7 +39,7 @@ readonly class GridDrawer
             foreach ($this->subLabelController->labels($xAxis, $label->value - $xAxis->minValue) as $subLabel) {
                 $x = $this->mapper->valueToCoordinate($xAxis, $subLabel->value);
 
-                if (Number::isMoreThanOrEqual($x, $chart->grid->xm)) {
+                if (FloatingNumber::isMoreThanOrEqual($x, $chart->grid->xm)) {
                     break;
                 }
 
@@ -66,7 +65,7 @@ readonly class GridDrawer
             foreach ($this->subLabelController->labels($yAxis, $label->value - $yAxis->minValue) as $subLabel) {
                 $y = $this->mapper->valueToCoordinate($yAxis, $subLabel->value);
 
-                if (Number::isLessThanOrEqual($y, $chart->grid->ym)) {
+                if (FloatingNumber::isLessThanOrEqual($y, $chart->grid->ym)) {
                     break;
                 }
 

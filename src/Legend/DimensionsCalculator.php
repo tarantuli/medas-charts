@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Legend;
 
-use Medas\Charts\{Chart, Text\BoundingBoxFactory};
+use Medas\Charts\Chart;
 use Medas\Core\Attributes\Service;
+use Medas\ImageDrawer\Text\BoundingBoxFactory;
 
 #[Service]
 readonly class DimensionsCalculator

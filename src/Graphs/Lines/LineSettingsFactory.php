@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Medas\Charts\Graphs\Lines;
 
 use Medas\Core\Attributes\Service;
-use Medas\ImageManager\ColorManager;
+use Medas\ImageDrawer\Colors\ColorFactory;
 
 #[Service]
 readonly class LineSettingsFactory
 {
     public function __construct(
-        private ColorManager $colorManager,
+        private ColorFactory $colorFactory,
     )
     {
     }
@@ -20,7 +20,7 @@ readonly class LineSettingsFactory
     {
         $settings = new LineSettings();
 
-        $settings->color = $this->colorManager->fromHtmlString('#4572A7');
+        $settings->color = $this->colorFactory->fromHtmlString('#4572A7');
         $settings->disconnectLimit = 2;
         $settings->thickness = 1;
         $settings->subCurveWidth = 0;

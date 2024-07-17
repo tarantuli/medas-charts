@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes\Labels;
 
-use Medas\Charts\Coordinates\Mapper;
-use Medas\Charts\Image\Drawers\{FilledRectangleDrawer, TextDrawer};
-use Medas\Charts\Number;
-use Medas\Charts\Rendering\Job;
-use Medas\Charts\Text\BoundingBoxFactory;
-use Medas\Core\Attributes\Service;
-use Medas\ImageManager\Color;
+use Medas\Charts\{Coordinates\Mapper, Rendering\Job};
+use Medas\Core\{Attributes\Service, FloatingNumber};
+use Medas\ImageDrawer\{
+    Colors\Color,
+    Drawers\FilledRectangleDrawer,
+    Drawers\TextDrawer,
+    Text\BoundingBoxFactory
+};
 
 #[Service]
 readonly class LabelDrawer
@@ -50,7 +51,7 @@ readonly class LabelDrawer
         $labelSettings = $axis->settings->labelSettings;
         $y = $this->mapper->valueToCoordinate($job->chart->yAxis, 0);
 
-        if (!Number::isBetweenInclusive($grid->yo, $y, $grid->ym)) {
+        if (!FloatingNumber::isBetweenInclusive($grid->yo, $y, $grid->ym)) {
             $y = $grid->yo;
         }
 
@@ -84,7 +85,7 @@ readonly class LabelDrawer
         $labelSettings = $axis->settings->labelSettings;
         $x = $this->mapper->valueToCoordinate($job->chart->xAxis, 0);
 
-        if (!Number::isBetweenInclusive($grid->xo, $x, $grid->xm)) {
+        if (!FloatingNumber::isBetweenInclusive($grid->xo, $x, $grid->xm)) {
             $x = $grid->xo;
         }
 
@@ -123,7 +124,7 @@ readonly class LabelDrawer
         $labelSettings = $axis->settings->labelSettings;
         $x = $this->mapper->valueToCoordinate($job->chart->xAxis, 0);
 
-        if (!Number::isBetweenInclusive($grid->xo, $x, $grid->xm)) {
+        if (!FloatingNumber::isBetweenInclusive($grid->xo, $x, $grid->xm)) {
             $x = $grid->xm;
         }
 

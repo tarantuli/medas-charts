@@ -6,7 +6,7 @@ namespace Medas\Charts\Colors;
 
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
-use Medas\ImageManager\Color;
+use Medas\ImageDrawer\Colors\Color;
 
 #[Service]
 readonly class ColorGenerator

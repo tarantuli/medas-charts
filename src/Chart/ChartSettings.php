@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Chart;
 
-use Medas\Charts\{Colors\ColorScheme, General\TextSettings};
-use Medas\ImageManager\Color;
+use Medas\Charts\Colors\ColorScheme;
+use Medas\ImageDrawer\{Colors\Color, TextSettings};
 
 class ChartSettings
 {

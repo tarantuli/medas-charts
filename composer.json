@@ -15,7 +15,7 @@
     "prefer-stable": true,
     "require": {
         "morphp/medas-core": "dev-dev",
-        "morphp/medas-image-manager": "dev-dev",
+        "morphp/medas-image-drawer": "dev-dev",
         "ext-gd": "*",
         "ext-intl": "*"
     },

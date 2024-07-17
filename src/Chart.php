@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts;
 
+use Medas\ImageDrawer\ImageSettings;
+
 class Chart
 {
     // Elements
@@ -13,11 +15,12 @@ class Chart
     public Grid\Grid $grid;
 
     // Settings
-    public Image\ImageSettings $imageSettings;
+    public ImageSettings $imageSettings;
     public Chart\ChartSettings $chartSettings;
     public Settings\FontSettings $fontSettings;
     public Settings\ColorSettings $colorSettings;
     public Legend\LegendSettings $legendSettings;
+    public Image\SizeLock $sizeLock;
 
     // Data settings
     public Data\DataSettings $dataSettings;

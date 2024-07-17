@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes;
 
-use Medas\Charts\Coordinates\Mapper;
-use Medas\Charts\Image\Drawers\LineDrawer;
-use Medas\Charts\Number;
-use Medas\Charts\Rendering\Job;
-use Medas\Core\Attributes\Service;
+use Medas\Charts\{Coordinates\Mapper, Rendering\Job};
+use Medas\Core\{Attributes\Service, FloatingNumber};
+use Medas\ImageDrawer\Drawers\LineDrawer;
 
 #[Service]
 readonly class AxeDrawer
@@ -33,7 +31,7 @@ readonly class AxeDrawer
         $xAxis = $job->chart->xAxis;
         $y = $this->mapper->valueToCoordinate($job->chart->yAxis, 0);
 
-        if (!Number::isBetweenInclusive($grid->yo, $y, $grid->yo)) {
+        if (!FloatingNumber::isBetweenInclusive($grid->yo, $y, $grid->yo)) {
             $y = $grid->yo;
         }
 
@@ -61,7 +59,7 @@ readonly class AxeDrawer
         $yAxis = $job->chart->yAxis;
         $x = $this->mapper->valueToCoordinate($job->chart->xAxis, 0);
 
-        if (!Number::isBetweenInclusive($grid->xo, $x, $grid->xo)) {
+        if (!FloatingNumber::isBetweenInclusive($grid->xo, $x, $grid->xo)) {
             $x = $grid->xo;
         }
 

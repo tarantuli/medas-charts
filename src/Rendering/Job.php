@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Rendering;
 
-use Medas\Charts\{Chart, Image\Image};
+use Medas\Charts\Chart;
+use Medas\ImageDrawer\Image;
 
 class Job
 {

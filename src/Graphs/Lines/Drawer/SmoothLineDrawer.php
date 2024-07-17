@@ -7,10 +7,9 @@ namespace Medas\Charts\Graphs\Lines\Drawer;
 use Medas\Charts\Colors\ColorGenerator;
 use Medas\Charts\Coordinates\SeriesMapper;
 use Medas\Charts\Graphs\{Lines\LineGraph, YAxisType};
-use Medas\Charts\Image\Drawers\LineDrawer as ImageLineDrawer;
-use Medas\Charts\Number;
 use Medas\Charts\Rendering\Job;
-use Medas\Core\Attributes\Service;
+use Medas\Core\{Attributes\Service, FloatingNumber};
+use Medas\ImageDrawer\Drawers\LineDrawer as ImageLineDrawer;
 
 #[Service]
 readonly class SmoothLineDrawer
@@ -46,15 +45,15 @@ readonly class SmoothLineDrawer
         }
 
         for ($i = 1; $i <= $state->count - 2; ++$i) {
-            if (Number::areEqual($state->xs[$i], $state->xs[$i + 1])) {
+            if (FloatingNumber::areEqual($state->xs[$i], $state->xs[$i + 1])) {
                 continue;
             }
 
-            if (Number::areEqual($state->xs[$i], $state->xs[$i - 1])) {
+            if (FloatingNumber::areEqual($state->xs[$i], $state->xs[$i - 1])) {
                 continue;
             }
 
-            if (Number::areEqual($state->xs[$i - 1], $state->xs[$i + 1])) {
+            if (FloatingNumber::areEqual($state->xs[$i - 1], $state->xs[$i + 1])) {
                 continue;
             }
 
@@ -96,9 +95,8 @@ readonly class SmoothLineDrawer
             $aComponent = $a * $state->ys[$i];
             $bComponent = $b * $state->ys[$j];
 
-            $mixComponent
-                = (($a * $a * $a - $a) * $state->ys2[$i] + ($b * $b * $b - $b) * $state->ys2[$j]) * ($h * $h)
-                    / 6.0;
+            $mixComponent = (($a * $a * $a - $a) * $state->ys2[$i] + ($b * $b * $b - $b) * $state->ys2[$j])
+                * ($h * $h) / 6.0;
 
             $y = $aComponent + $bComponent + $mixComponent;
 

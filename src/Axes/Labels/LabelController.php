@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Medas\Charts\Axes\Labels;
 
 use Medas\Charts\Axes\{Axis, IntervalTypes\IterationType};
-use Medas\Charts\Number;
-use Medas\Core\Attributes\Service;
+use Medas\Core\{Attributes\Service, DateConstants, FloatingNumber};
 
 #[Service]
 readonly class LabelController
@@ -40,7 +39,8 @@ readonly class LabelController
                         0,
                         0,
                         (int) date('m', $axis->minValue),
-                        ((int) date('d', $axis->minValue)) + $index * $axis->interval / Number::ONE_DAY,
+                        ((int) date('d', $axis->minValue))
+                            + $index * $axis->interval / DateConstants::ONE_DAY,
                         (int) date('Y', $axis->minValue)
                     );
 
@@ -81,6 +81,6 @@ readonly class LabelController
             return false;
         }
 
-        return Number::isLessThanOrEqual($value, $axis->maxValue);
+        return FloatingNumber::isLessThanOrEqual($value, $axis->maxValue);
     }
 }

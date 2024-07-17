@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Medas\Charts\Axes\Labels;
 
 use Medas\Charts\Axes\{Axis, IntervalTypes\IterationType};
-use Medas\Charts\Number;
-use Medas\Core\Attributes\Service;
+use Medas\Core\{Attributes\Service, DateConstants};
 
 #[Service]
 readonly class SubLabelController
@@ -33,7 +32,7 @@ readonly class SubLabelController
                         (int) (((int) date(
                             'd',
                             $axis->minValue
-                        )) + $mainValue + $subIndex * $axis->subgridInterval / Number::ONE_DAY),
+                        )) + $mainValue + $subIndex * $axis->subgridInterval / DateConstants::ONE_DAY),
                         (int) date('Y', $axis->minValue)
                     );
 

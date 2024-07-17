@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes\IntervalTypes;
 
-use Medas\Charts\{Axes\Axis, Number};
-use Medas\Core\Attributes\Service;
+use Medas\Charts\Axes\Axis;
+use Medas\Core\{Attributes\Service, DateConstants, FloatingNumber};
 
 #[Service]
 readonly class DateTimeController
@@ -15,19 +15,19 @@ readonly class DateTimeController
         $axis->roughInterval = ($axis->maxValue - $axis->minValue)
             / $axis->settings->desiredIntervalCount;
 
-        if ($axis->roughInterval < Number::ONE_MINUTE) {
+        if ($axis->roughInterval < DateConstants::ONE_MINUTE) {
             $this->determineForLessThanAMinute($axis);
         }
-        elseif ($axis->roughInterval < Number::ONE_HOUR) {
+        elseif ($axis->roughInterval < DateConstants::ONE_HOUR) {
             $this->determineForLessThanAnHour($axis);
         }
-        elseif ($axis->roughInterval < Number::ONE_DAY) {
+        elseif ($axis->roughInterval < DateConstants::ONE_DAY) {
             $this->determineForLessThanADay($axis);
         }
-        elseif ($axis->roughInterval < Number::ONE_WEEK) {
+        elseif ($axis->roughInterval < DateConstants::ONE_WEEK) {
             $this->determineForLessThanAWeek($axis);
         }
-        elseif ($axis->roughInterval < Number::ONE_YEAR) {
+        elseif ($axis->roughInterval < DateConstants::ONE_YEAR) {
             $this->determineForLessThanAYear($axis);
         }
         else {
@@ -95,10 +95,10 @@ readonly class DateTimeController
 
         $axis->minValue = mktime(
             (int) date('H', $axis->minValue),
-            ($axis->interval / Number::ONE_MINUTE) * floor(date(
+            ($axis->interval / DateConstants::ONE_MINUTE) * floor(date(
                 'i',
                 $axis->minValue
-            ) / ($axis->interval / Number::ONE_MINUTE) - $axis->barOffset),
+            ) / ($axis->interval / DateConstants::ONE_MINUTE) - $axis->barOffset),
             0,
             (int) date('m', $axis->minValue),
             (int) date('d', $axis->minValue),
@@ -107,10 +107,10 @@ readonly class DateTimeController
 
         $axis->maxValue = mktime(
             (int) date('H', $axis->maxValue),
-            ($axis->interval / Number::ONE_MINUTE) * ceil(date(
+            ($axis->interval / DateConstants::ONE_MINUTE) * ceil(date(
                 'i',
                 $axis->maxValue
-            ) / ($axis->interval / Number::ONE_MINUTE) + $axis->barOffset),
+            ) / ($axis->interval / DateConstants::ONE_MINUTE) + $axis->barOffset),
             0,
             (int) date('m', $axis->maxValue),
             (int) date('d', $axis->maxValue),
@@ -137,15 +137,15 @@ readonly class DateTimeController
         $axis->subgridCount = $options[$axis->interval];
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
 
-        if (Number::areEqual($axis->interval / Number::ONE_HOUR, 24)) {
+        if (FloatingNumber::areEqual($axis->interval / DateConstants::ONE_HOUR, 24)) {
             $axis->dateLabelFormat = '%d %b';
         }
 
         $axis->minValue = mktime(
-            ($axis->interval / Number::ONE_HOUR) * floor(date(
+            ($axis->interval / DateConstants::ONE_HOUR) * floor(date(
                 'H',
                 $axis->minValue
-            ) / ($axis->interval / Number::ONE_HOUR) - $axis->barOffset),
+            ) / ($axis->interval / DateConstants::ONE_HOUR) - $axis->barOffset),
             0,
             0,
             (int) date('m', $axis->minValue),
@@ -154,10 +154,10 @@ readonly class DateTimeController
         );
 
         $axis->maxValue = mktime(
-            ($axis->interval / Number::ONE_HOUR) * ceil(date(
+            ($axis->interval / DateConstants::ONE_HOUR) * ceil(date(
                 'H',
                 $axis->maxValue
-            ) / ($axis->interval / Number::ONE_HOUR) + $axis->barOffset),
+            ) / ($axis->interval / DateConstants::ONE_HOUR) + $axis->barOffset),
             0,
             0,
             (int) date('m', $axis->maxValue),
@@ -212,7 +212,7 @@ readonly class DateTimeController
             ? '%b %Y'
             : '1 %b';
 
-        $axis->roughInterval /= Number::ONE_MONTH;
+        $axis->roughInterval /= DateConstants::ONE_MONTH;
 
         $options = [
             1 => 1,
@@ -261,7 +261,7 @@ readonly class DateTimeController
     private function determineForAYearOrMore(Axis $axis): void
     {
         $axis->dateLabelFormat = '%Y';
-        $axis->roughInterval /= Number::ONE_YEAR;
+        $axis->roughInterval /= DateConstants::ONE_YEAR;
         $axis->interval = $this->normalizeInterval($axis, $axis->roughInterval);
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
         $axis->iterationType = IterationType::Yearly;
@@ -279,7 +279,7 @@ readonly class DateTimeController
 
     private function normalizeInterval(Axis $axis, float $range): float
     {
-        if (Number::isZeroOrLess($range)) {
+        if (FloatingNumber::isZeroOrLess($range)) {
             $axis->subgridCount = 1;
 
             return 1;
@@ -292,7 +292,7 @@ readonly class DateTimeController
         $base = null;
 
         foreach ($bases as $base) {
-            if (Number::isLessThanOrEqual($range, $intervalCount * $base * $factor)) {
+            if (FloatingNumber::isLessThanOrEqual($range, $intervalCount * $base * $factor)) {
                 break;
             }
         }

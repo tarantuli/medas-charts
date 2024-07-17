@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Legend;
 
-use Medas\Charts\General\{FourSides, TextSettings};
-use Medas\Core\Attributes\Service;
-use Medas\ImageManager\ColorManager;
+use Medas\Core\{Attributes\Service, RectangleSides};
+use Medas\ImageDrawer\{Colors\ColorFactory, TextSettings};
 
 #[Service]
 readonly class LegendSettingsFactory
 {
     public function __construct(
-        private ColorManager $colorManager,
+        private ColorFactory $colorFactory,
     )
     {
     }
@@ -21,16 +20,16 @@ readonly class LegendSettingsFactory
     {
         $settings = new LegendSettings();
 
-        $settings->backgroundColor = $this->colorManager->fromHtmlString('#dfff');
-        $settings->margin = new FourSides(5);
-        $settings->padding = new FourSides(3);
+        $settings->backgroundColor = $this->colorFactory->fromHtmlString('#dfff');
+        $settings->margin = new RectangleSides(5);
+        $settings->padding = new RectangleSides(3);
         $settings->lineSpacing = 5;
 
         $settings->labelSettings = new TextSettings(
             font: 'Rubik-Regular',
             size: 10,
             margin: 0,
-            color: $this->colorManager->fromHtmlString('#000'),
+            color: $this->colorFactory->fromHtmlString('#000'),
         );
 
         $settings->marker = '&#x25ac;';

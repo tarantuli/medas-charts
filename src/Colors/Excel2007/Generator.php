@@ -6,7 +6,7 @@ namespace Medas\Charts\Colors\Excel2007;
 
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
-use Medas\ImageManager\{Color, ColorManager};
+use Medas\ImageDrawer\Colors\{Color, ColorFactory};
 
 #[Service]
 readonly class Generator
@@ -26,7 +26,7 @@ readonly class Generator
     private const COLOR_COUNT = 10;
 
     public function __construct(
-        private ColorManager $colorManager,
+        private ColorFactory $colorFactory,
     )
     {
     }
@@ -35,6 +35,6 @@ readonly class Generator
     {
         $index = $job->generatedColorCounter++ % self::COLOR_COUNT;
 
-        return $this->colorManager->fromHtmlString(self::EXCEL2007_COLORS_LIST[$index]);
+        return $this->colorFactory->fromHtmlString(self::EXCEL2007_COLORS_LIST[$index]);
     }
 }

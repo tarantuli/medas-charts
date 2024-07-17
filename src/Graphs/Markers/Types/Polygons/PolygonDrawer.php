@@ -7,9 +7,9 @@ namespace Medas\Charts\Graphs\Markers\Types\Polygons;
 use Medas\Charts\Colors\ColorGenerator;
 use Medas\Charts\Graphs\Lines\LineGraph;
 use Medas\Charts\Graphs\Markers\Types\{MarkerType, TypeDrawer};
-use Medas\Charts\Image\Drawers\FilledPolygonDrawer;
 use Medas\Charts\Rendering\Job;
 use Medas\Core\Attributes\Service;
+use Medas\ImageDrawer\Drawers\FilledPolygonDrawer;
 
 #[Service]
 readonly class PolygonDrawer implements TypeDrawer

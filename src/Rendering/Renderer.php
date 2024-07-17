@@ -8,9 +8,9 @@ use Medas\Charts\Axes\{AxeDrawer, Labels\LabelDrawer};
 use Medas\Charts\Chart;
 use Medas\Charts\Graphs\Drawers\GraphsDrawer;
 use Medas\Charts\Grid\GridDrawer;
-use Medas\Charts\Image\{Image, ImageFactory, Size\Resizer};
 use Medas\Charts\Legend\LegendDrawer;
 use Medas\Core\Attributes\{Entrypoint, Service};
+use Medas\ImageDrawer\{Image, ImageFactory, Size\Resizer};
 
 #[Service, Entrypoint]
 readonly class Renderer
@@ -35,7 +35,12 @@ readonly class Renderer
 
         $this->dimensionsCalculator->calculate($chart);
 
-        $job->image = $this->imageFactory->create($chart);
+        $job->image = $this->imageFactory->create(
+            $chart->imageSettings->width,
+            $chart->imageSettings->height,
+            $chart->imageSettings->scalingFactor,
+            $chart->imageSettings->backgroundColor
+        );
 
         // Draw non-textual elements with alpha blending turned off
         $this->drawNonTextualElements($job);

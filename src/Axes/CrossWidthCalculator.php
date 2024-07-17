@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes;
 
-use Medas\Charts\Text\BoundingBoxFactory;
 use Medas\Core\Attributes\Service;
+use Medas\ImageDrawer\Text\BoundingBoxFactory;
 
 #[Service]
 readonly class CrossWidthCalculator

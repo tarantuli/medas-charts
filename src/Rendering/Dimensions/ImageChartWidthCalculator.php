@@ -38,7 +38,7 @@ readonly class ImageChartWidthCalculator
         $legendWidth = $this->legendWidth($chart);
         $rightPadding = $chart->imageSettings->padding->right;
 
-        if ($chart->imageSettings->sizeLock === SizeLock::ImageSize) {
+        if ($chart->sizeLock === SizeLock::ImageSize) {
             $imageWidth = $chart->imageSettings->width;
 
             $chartWidth = $imageWidth

@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Axes;
 
-use Medas\Charts\{Alignment\Alignment, Alignment\Horizontal, General\TextSettings};
 use Medas\Core\Attributes\Service;
-use Medas\ImageManager\ColorManager;
+use Medas\ImageDrawer\Colors\ColorFactory;
+use Medas\ImageDrawer\Text\Alignment\{Alignment, Horizontal};
+use Medas\ImageDrawer\TextSettings;
 
 #[Service]
 readonly class AxisFactory
 {
     public function __construct(
-        private ColorManager $colorManager,
+        private ColorFactory $colorFactory,
     )
     {
     }
@@ -21,7 +22,7 @@ readonly class AxisFactory
     {
         $settings = new AxisSettings();
 
-        $settings->color = $this->colorManager->fromHtmlString('#000');
+        $settings->color = $this->colorFactory->fromHtmlString('#000');
         $settings->showTicks = true;
         $settings->tickLength = 3.0;
         $settings->tickMargin = 3.0;
@@ -32,7 +33,7 @@ readonly class AxisFactory
             font: 'Rubik-Regular',
             size: 12,
             margin: 5,
-            color: $this->colorManager->fromHtmlString('#000'),
+            color: $this->colorFactory->fromHtmlString('#000'),
         );
 
         $settings->intervalType = IntervalTypes\IntervalType::Numeric;
@@ -52,7 +53,7 @@ readonly class AxisFactory
         $axis->settings->labelSettings = new TextSettings(
             font: 'Rubik-Regular',
             size: 10,
-            color: $this->colorManager->fromHtmlString('#000'),
+            color: $this->colorFactory->fromHtmlString('#000'),
             angle: 90,
         );
 
@@ -80,7 +81,7 @@ readonly class AxisFactory
         $axis->settings->labelSettings = new TextSettings(
             font: 'Rubik-Regular',
             size: 10,
-            color: $this->colorManager->fromHtmlString('#000')
+            color: $this->colorFactory->fromHtmlString('#000')
         );
 
         $axis->settings->titleSettings->angle = 90;

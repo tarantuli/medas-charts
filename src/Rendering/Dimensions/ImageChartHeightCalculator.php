@@ -35,7 +35,7 @@ readonly class ImageChartHeightCalculator
         $xAxisHeight = $this->crossWidthCalculator->calculate($chart->xAxis);
         $bottomPadding = $chart->imageSettings->padding->bottom;
 
-        if ($chart->imageSettings->sizeLock === SizeLock::ImageSize) {
+        if ($chart->sizeLock === SizeLock::ImageSize) {
             $imageHeight = $chart->imageSettings->height;
 
             $chartHeight = $imageHeight

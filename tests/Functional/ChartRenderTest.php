@@ -6,14 +6,14 @@ namespace Medas\ChartsTest\Functional;
 
 use Medas\Charts\ChartFactory;
 use Medas\Charts\Data\DataManager;
-use Medas\Charts\Data\Sources\{Formulas\Formula, KeyToValueArray\KeyToValueArray};
+use Medas\Charts\Data\Sources\{Formulas\Formula,KeyToValueArray\KeyToValueArray};
 use Medas\Charts\Graphs\GraphController;
 use Medas\Charts\Graphs\Lines\LineGraphFactory;
-use Medas\Charts\Graphs\Markers\Types\{Polygons\Pentagon, Squares\Square};
+use Medas\ImageDrawer\Colors\ColorFactory;
+use Medas\Charts\Graphs\Markers\Types\{Polygons\Pentagon,Squares\Square};
 use Medas\Charts\Graphs\YAxisType;
-use Medas\Charts\Image\Image;
 use Medas\Charts\Rendering\Renderer;
-use Medas\ImageManager\ColorManager;
+use Medas\ImageDrawer\Image;
 use PHPUnit\Framework\TestCase;
 
 class ChartRenderTest extends TestCase
@@ -24,7 +24,7 @@ class ChartRenderTest extends TestCase
         $dataManager = service(DataManager::class);
         $graphController = service(GraphController::class);
         $lineGraphFactory = service(LineGraphFactory::class);
-        $chart->imageSettings->backgroundColor = service(ColorManager::class)->fromHtmlString('#fff');
+        $chart->imageSettings->backgroundColor = service(ColorFactory::class)->fromHtmlString('#fff');
 
         // Circle markers
         $dataName = $dataManager->addSeries(

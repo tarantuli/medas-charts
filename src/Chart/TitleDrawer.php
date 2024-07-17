@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Medas\Charts\Chart;
 
-use Medas\Charts\Image\Drawers\TextDrawer;
 use Medas\Charts\Rendering\Job;
-use Medas\Charts\Text\BoundingBoxFactory;
 use Medas\Core\Attributes\Service;
+use Medas\ImageDrawer\{Drawers\TextDrawer, Text\BoundingBoxFactory};
 
 #[Service]
 readonly class TitleDrawer

@@ -12,9 +12,9 @@ use Medas\ImageDrawer\Drawers\LineDrawer;
 readonly class AxeDrawer
 {
     public function __construct(
-        private Mapper                 $mapper,
-        private LineDrawer             $lineDrawer,
         private Labels\LabelController $labelController,
+        private LineDrawer             $lineDrawer,
+        private Mapper                 $mapper,
     )
     {
     }

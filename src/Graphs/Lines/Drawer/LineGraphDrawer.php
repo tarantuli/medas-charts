@@ -12,9 +12,9 @@ use Medas\Core\Attributes\Service;
 readonly class LineGraphDrawer implements GraphDrawer
 {
     public function __construct(
+        private MarkerDrawer       $markerDrawer,
         private SmoothLineDrawer   $smoothLineDrawer,
         private StraightLineDrawer $straightLineDrawer,
-        private MarkerDrawer       $markerDrawer,
     )
     {
     }

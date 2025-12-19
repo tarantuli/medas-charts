@@ -11,7 +11,7 @@ use Medas\ImageDrawer\Colors\{Color, ColorFactory};
 #[Service]
 readonly class Generator
 {
-    private const EXCEL2007_COLORS_LIST = [
+    private const array EXCEL2007_COLORS_LIST = [
         '#4572a7',
         '#aa4643',
         '#89a54e',
@@ -23,7 +23,7 @@ readonly class Generator
         '#b9cd96',
         '#a99bbd',
     ];
-    private const COLOR_COUNT = 10;
+    private const int COLOR_COUNT = 10;
 
     public function __construct(
         private ColorFactory $colorFactory,

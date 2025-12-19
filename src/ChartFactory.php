@@ -12,6 +12,7 @@ readonly class ChartFactory
 {
     public function __construct(
         private Axes\AxisFactory                          $axisFactory,
+        private Chart\ChartSettingsFactory                $chartSettingsFactory,
         private Data\DataSettingsFactory                  $dataSettingsFactory,
         private Graphs\BarGraph\BarGraphSettingsFactory   $barGraphSettingsFactory,
         private Graphs\GraphSettingsFactory               $graphSettingsFactory,
@@ -21,7 +22,6 @@ readonly class ChartFactory
         private Grid\GridFactory                          $gridFactory,
         private ImageSettingsFactory                      $imageSettingsFactory,
         private Legend\LegendSettingsFactory              $legendSettingsFactory,
-        private Chart\ChartSettingsFactory                $chartSettingsFactory,
         private Settings\ColorSettingsFactory             $colorSettingsFactory,
         private Settings\FontSettingsFactory              $fontSettingsFactory,
     )

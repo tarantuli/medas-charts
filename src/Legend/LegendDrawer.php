@@ -12,8 +12,8 @@ use Medas\ImageDrawer\Drawers\{FilledRectangleDrawer, TextDrawer};
 readonly class LegendDrawer
 {
     public function __construct(
-        private FilledRectangleDrawer $filledRectangleDrawer,
         private CoordinatesCalculator $coordinatesCalculator,
+        private FilledRectangleDrawer $filledRectangleDrawer,
         private TextDrawer            $textDrawer,
     )
     {

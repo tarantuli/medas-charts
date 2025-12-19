@@ -16,10 +16,10 @@ readonly class StraightLineDrawer
 {
     public function __construct(
         private ColorGenerator     $colorGenerator,
+        private GapLimitCalculator $gapLimitCalculator,
         private ImageLineDrawer    $imageLineDrawer,
         private MarkerDrawer       $markerDrawer,
         private SeriesMapper       $seriesMapper,
-        private GapLimitCalculator $gapLimitCalculator,
     )
     {
     }

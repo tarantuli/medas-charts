@@ -14,8 +14,8 @@ use Medas\Core\Attributes\Service;
 readonly class ImageChartHeightCalculator
 {
     public function __construct(
-        private CrossWidthCalculator        $crossWidthCalculator,
         private Chart\TitleHeightCalculator $titleHeightCalculator,
+        private CrossWidthCalculator        $crossWidthCalculator,
     )
     {
     }

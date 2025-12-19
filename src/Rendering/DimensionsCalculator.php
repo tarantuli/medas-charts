@@ -12,8 +12,8 @@ readonly class DimensionsCalculator
 {
     public function __construct(
         private AxisRangeController                   $axisRangeController,
-        private Dimensions\ImageChartWidthCalculator  $imageChartWidthCalculator,
         private Dimensions\ImageChartHeightCalculator $imageChartHeightCalculator,
+        private Dimensions\ImageChartWidthCalculator  $imageChartWidthCalculator,
     )
     {
     }

@@ -28,10 +28,8 @@ readonly class GraphsDrawer
 
     private function handleGraph(Job $job, Graph $graph): void
     {
-        foreach ($this->handlers as $handler) {
-            if ($handler->handle($job, $graph)) {
-                return;
-            }
+        if (array_any($this->handlers, fn($handler) => $handler->handle($job, $graph))) {
+            return;
         }
 
         throw new Exceptions\NoDrawerFoundForGraph($graph);

@@ -17,9 +17,9 @@ readonly class MarkerDrawer
     private array $typeDrawers;
 
     public function __construct(
-        private SeriesManager   $seriesManager,
-        private Mapper          $mapper,
         Types\TypeDrawerManager $drawerManager,
+        private Mapper          $mapper,
+        private SeriesManager   $seriesManager,
     )
     {
         $this->typeDrawers = $drawerManager->get();
@@ -43,10 +43,8 @@ readonly class MarkerDrawer
     {
         $type = $graph->markerSettings->type ?? $job->chart->markerSettings->type;
 
-        foreach ($this->typeDrawers as $typeDrawer) {
-            if ($typeDrawer->handle($job, $graph, $type, $x, $y)) {
-                return;
-            }
+        if (array_any($this->typeDrawers, fn($typeDrawer) => $typeDrawer->handle($job, $graph, $type, $x, $y))) {
+            return;
         }
 
         throw new Exceptions\NoHandlerForMarkerTypeFound($type);

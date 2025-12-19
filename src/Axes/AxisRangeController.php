@@ -12,9 +12,9 @@ readonly class AxisRangeController
 {
     public function __construct(
         private GraphController                     $graphController,
-        private IntervalTypes\NumericController     $numericController,
         private IntervalTypes\CategorizedController $categorizedController,
         private IntervalTypes\DateTimeController    $dateTimeController,
+        private IntervalTypes\NumericController     $numericController,
     )
     {
     }

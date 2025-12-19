@@ -16,8 +16,8 @@ readonly class GridDrawer
     public function __construct(
         private LabelController    $labelController,
         private LineDrawer         $lineDrawer,
-        private SubLabelController $subLabelController,
         private Mapper             $mapper,
+        private SubLabelController $subLabelController,
     )
     {
     }

@@ -29,8 +29,11 @@ readonly class SeriesManager
         }
 
         $series = $chart->dataSeries[$name];
+        $controller = $chart->seriesControllers[$series];
 
-        return $chart->seriesControllers[$series]->getKeys($series);
+        return $controller instanceof Sources\ArrayOfArrays\ArrayOfArraysController
+            ? $controller->getKeys($series)
+            : [];
     }
 
     /** @return Datum[] */

@@ -10,7 +10,7 @@ use Medas\Core\Attributes\Service;
 #[Service]
 readonly class LabelFormatter
 {
-    public function format(Axis $axis, Label $label, Label $previousLabel = null): string
+    public function format(Axis $axis, Label $label, Label|null $previousLabel = null): string
     {
         if (isset($label->formatted)) {
             return $label->formatted;

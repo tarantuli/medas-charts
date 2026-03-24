@@ -31,7 +31,7 @@ readonly class AxeDrawer
         $xAxis = $job->chart->xAxis;
         $y = $this->mapper->valueToCoordinate($job->chart->yAxis, 0);
 
-        if (!FloatingNumber::isBetweenInclusive($grid->yo, $y, $grid->yo)) {
+        if (!FloatingNumber::isBetweenInclusive($grid->yo, $y, $grid->ym)) {
             $y = $grid->yo;
         }
 

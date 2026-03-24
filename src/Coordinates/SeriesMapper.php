@@ -64,10 +64,10 @@ readonly class SeriesMapper
 
         $maxHeight = 2 / $spread;
 
-        foreach ($job->chart->seriesControllers[$series]->getData($series) as $key => $value) {
-            $center = $this->mapper->valueToCoordinate($xAxis, $key);
-            $from = $this->mapper->valueToCoordinate($xAxis, $key - $halfwidth);
-            $to = $this->mapper->valueToCoordinate($xAxis, $key + $halfwidth);
+        foreach ($job->chart->seriesControllers[$series]->getData($series) as $datum) {
+            $center = $this->mapper->valueToCoordinate($xAxis, $datum->key);
+            $from = $this->mapper->valueToCoordinate($xAxis, $datum->key - $halfwidth);
+            $to = $this->mapper->valueToCoordinate($xAxis, $datum->key + $halfwidth);
 
             for ($x = ceil($from); $x <= floor($to); ++$x) {
                 $x = (int) $x;
@@ -76,7 +76,7 @@ readonly class SeriesMapper
                     $newValues[$x] = 0.0;
                 }
 
-                $newValues[$x] += $value * $maxHeight * (1 - abs($center - $x) / $spread);
+                $newValues[$x] += $datum->value * $maxHeight * (1 - abs($center - $x) / $spread);
             }
         }
 

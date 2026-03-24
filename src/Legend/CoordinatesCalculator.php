@@ -65,7 +65,7 @@ readonly class CoordinatesCalculator
 
             case Location::LeftMargin:
                 $yAxisWidth = $this->crossWidthCalculator->calculate($job->chart->yAxis);
-                $x = $xo - $yAxisWidth - $margins->right;
+                $x = $xo - $yAxisWidth - $margins->left;
                 $y = $ym;
 
                 break;

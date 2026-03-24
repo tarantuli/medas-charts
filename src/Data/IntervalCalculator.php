@@ -25,9 +25,9 @@ readonly class IntervalCalculator
         $intervals = [];
         $previousX = null;
 
-        foreach ($this->seriesManager->getData($job->chart, $seriesName) as $x => $y) {
+        foreach ($this->seriesManager->getData($job->chart, $seriesName) as $datum) {
             if ($previousX !== null) {
-                $i = (string) ($x - $previousX);
+                $i = (string) ($datum->key - $previousX);
 
                 if ($i === '0') {
                     continue;
@@ -40,7 +40,7 @@ readonly class IntervalCalculator
                 ++$intervals[$i];
             }
 
-            $previousX = $x;
+            $previousX = $datum->key;
         }
 
         if (!count($intervals)) {
@@ -61,6 +61,6 @@ readonly class IntervalCalculator
             }
         }
 
-        return $job->seriesIntervals[$seriesName] = $interval;
+        return $job->seriesIntervals[$seriesName] = (float) $interval;
     }
 }

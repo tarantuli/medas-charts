@@ -12,15 +12,16 @@
   ],
   "type": "library",
   "require": {
-    "morphp/medas-core": "^3",
-    "morphp/medas-image-drawer": "^3",
     "ext-gd": "*",
-    "ext-intl": "*"
+    "ext-intl": "*",
+    "morphp/medas-core": "^3",
+    "morphp/medas-image-drawer": "^3"
   },
   "require-dev": {
-    "morphp/medas-service-manager": "^3",
     "morphp/medas-config-manager": "^3",
     "morphp/medas-config-options": "^3",
+    "morphp/medas-object-instantiator": "^3",
+    "morphp/medas-service-manager": "^3",
     "phpunit/phpunit": "^10"
   },
   "autoload": {

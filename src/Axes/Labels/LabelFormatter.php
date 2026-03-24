@@ -32,21 +32,17 @@ readonly class LabelFormatter
         }
 
         if ($axis->settings->intervalType === IntervalType::DateTime) {
-            $formatter = new \IntlDateFormatter(
-                locale_get_default(),
-                pattern: $axis->dateLabelFormat
-            );
+            $pattern = $axis->dateLabelFormat;
 
-            if ($previousLabel !== null && str_contains($axis->dateLabelFormat, 'dd')) {
-                $previousDate = date('Ymd', $previousLabel->value);
-                $currentDate = date('Ymd', $label->value);
-
-                if ($previousDate === $currentDate) {
-                    $formatter->setPattern('HH:mm');
+            if ($previousLabel !== null && str_contains($pattern, 'dd')) {
+                if (date('Ymd', $previousLabel->value) === date('Ymd', $label->value)) {
+                    $pattern = 'HH:mm';
                 }
             }
 
-            return $formatter->format($label->value);
+            $formatter = new \IntlDateFormatter(locale_get_default(), pattern: $pattern);
+
+            return $label->formatted = $formatter->format($label->value);
         }
 
         throw new \Exception('unhandled case');

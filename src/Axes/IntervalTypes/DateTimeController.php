@@ -263,6 +263,8 @@ readonly class DateTimeController
         $axis->dateLabelFormat = '%Y';
         $axis->roughInterval /= DateConstants::ONE_YEAR_OF_365_DAYS;
         $axis->interval = $this->normalizeInterval($axis, $axis->roughInterval);
+
+        // normalizeInterval sets $axis->subgridCount as a side-effect
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
         $axis->iterationType = IterationType::Yearly;
         $axis->minValue = mktime(0, 0, 0, 1, 1, date('Y', $axis->minValue) - $axis->barOffset);

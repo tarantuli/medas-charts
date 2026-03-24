@@ -79,11 +79,14 @@ readonly class AxisRangeController
 
     private function checkZeroRange(Axis $axis): void
     {
+        if ($axis->minValue === null || $axis->maxValue === null) {
+            return;
+        }
+
         if (is_nihil($axis->maxValue - $axis->minValue)) {
             $axis->hasZeroRange = true;
-            $axis->hasZeroRangeAt = $axis->maxValue ?? 0.0;
-
-            ++$axis->maxValue;
+            $axis->hasZeroRangeAt = $axis->maxValue;
+            $axis->maxValue += 1.0;
         }
     }
 

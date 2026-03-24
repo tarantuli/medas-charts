@@ -28,7 +28,7 @@ readonly class DimensionsCalculator
             + $chart->legendSettings->padding->right;
     }
 
-    private function maxLabelLength(Chart $chart): mixed
+    private function maxLabelLength(Chart $chart): float
     {
         $maxLength = 0;
 

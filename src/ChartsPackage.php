@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Charts;
 
-use Medas\Core\AsSingleton;
+use Medas\Core\{AsSingleton, BasePackage};
 use Medas\ImageDrawer\ImageDrawerPackage;
-use Medas\ServiceManager\BasePackage;
 
 class ChartsPackage extends BasePackage
 {

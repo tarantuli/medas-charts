@@ -17,9 +17,9 @@ readonly class MarkerDrawer
     private array $typeDrawers;
 
     public function __construct(
-        Types\TypeDrawerManager $drawerManager,
         private Mapper          $mapper,
         private SeriesManager   $seriesManager,
+        Types\TypeDrawerManager $drawerManager,
     )
     {
         $this->typeDrawers = $drawerManager->get();

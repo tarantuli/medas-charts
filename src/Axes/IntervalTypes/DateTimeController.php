@@ -27,7 +27,7 @@ readonly class DateTimeController
         elseif ($axis->roughInterval < DateConstants::ONE_WEEK) {
             $this->determineForLessThanAWeek($axis);
         }
-        elseif ($axis->roughInterval < DateConstants::ONE_YEAR) {
+        elseif ($axis->roughInterval < DateConstants::ONE_YEAR_OF_365_DAYS) {
             $this->determineForLessThanAYear($axis);
         }
         else {
@@ -212,7 +212,7 @@ readonly class DateTimeController
             ? '%b %Y'
             : '1 %b';
 
-        $axis->roughInterval /= DateConstants::ONE_MONTH;
+        $axis->roughInterval /= DateConstants::ONE_MONTH_OF_31_DAYS;
 
         $options = [
             1 => 1,
@@ -261,7 +261,7 @@ readonly class DateTimeController
     private function determineForAYearOrMore(Axis $axis): void
     {
         $axis->dateLabelFormat = '%Y';
-        $axis->roughInterval /= DateConstants::ONE_YEAR;
+        $axis->roughInterval /= DateConstants::ONE_YEAR_OF_365_DAYS;
         $axis->interval = $this->normalizeInterval($axis, $axis->roughInterval);
         $axis->subgridInterval = $axis->interval / $axis->subgridCount;
         $axis->iterationType = IterationType::Yearly;

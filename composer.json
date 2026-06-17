@@ -14,14 +14,14 @@
   "require": {
     "ext-gd": "*",
     "ext-intl": "*",
-    "morphp/medas-core": "^3",
+    "morphp/medas-core": "^4",
     "morphp/medas-image-drawer": "^3"
   },
   "require-dev": {
     "morphp/medas-config-manager": "^3",
     "morphp/medas-config-options": "^3",
-    "morphp/medas-object-instantiator": "^3",
-    "morphp/medas-service-manager": "^3",
+    "morphp/medas-object-instantiator": "^4",
+    "morphp/medas-service-manager": "^4",
     "phpunit/phpunit": "^10"
   },
   "autoload": {

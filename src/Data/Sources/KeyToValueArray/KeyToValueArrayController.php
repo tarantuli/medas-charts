@@ -46,7 +46,7 @@ readonly class KeyToValueArrayController implements SeriesController
         $series->data = [];
 
         foreach ($series->pairs as $key => $value) {
-            $series->data[] = new Datum($key, $value);
+            $series->data[] = new Datum((float) $key, $value);
         }
 
         return $series->data;
